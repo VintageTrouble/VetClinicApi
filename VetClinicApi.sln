@@ -3,11 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VetClinicApi.API", "VetClinicApi.API\VetClinicApi.API.csproj", "{8BD116CA-982E-4E72-A1D8-551075D69C30}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VetClinicApi.API", "VetClinicApi.API\VetClinicApi.API.csproj", "{8BD116CA-982E-4E72-A1D8-551075D69C30}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VetClinicApi.API.Tests", "VetClinicApi.API.Tests\VetClinicApi.API.Tests.csproj", "{5501030D-3CA2-4160-ABC0-592B91165A64}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClassLibrary1", "ClassLibrary1\ClassLibrary1.csproj", "{9CFDD79A-0ED2-42B1-86B8-1A05404AB510}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VetClinicApi.API.Tests", "VetClinicApi.API.Tests\VetClinicApi.API.Tests.csproj", "{5501030D-3CA2-4160-ABC0-592B91165A64}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,10 +21,6 @@ Global
 		{5501030D-3CA2-4160-ABC0-592B91165A64}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5501030D-3CA2-4160-ABC0-592B91165A64}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5501030D-3CA2-4160-ABC0-592B91165A64}.Release|Any CPU.Build.0 = Release|Any CPU
-		{9CFDD79A-0ED2-42B1-86B8-1A05404AB510}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{9CFDD79A-0ED2-42B1-86B8-1A05404AB510}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{9CFDD79A-0ED2-42B1-86B8-1A05404AB510}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{9CFDD79A-0ED2-42B1-86B8-1A05404AB510}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
