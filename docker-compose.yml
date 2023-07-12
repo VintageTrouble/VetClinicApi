@@ -1,0 +1,37 @@
+version: '3.4'
+
+services:
+  vetclinicapi:
+    build:
+      context: .
+      dockerfile: VetClinicApi.API/Dockerfile
+    ports:
+      - 443:443
+      - 80:80
+    networks:
+      - backend
+    env_file:
+      - .env
+    depends_on:
+      - database
+
+
+  database:
+    image: postgres:latest
+    ports:
+      - 5432:5432
+    networks:
+      - backend
+    restart: always
+    env_file:
+      - .env
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+
+
+networks:
+  backend:
+    name: backend-network
+
