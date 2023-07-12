@@ -3,7 +3,7 @@ version: '3.4'
 services:
   vetclinicapi:
     build:
-      context: .
+      context: ../
       dockerfile: VetClinicApi.API/Dockerfile
     ports:
       - 443:443
