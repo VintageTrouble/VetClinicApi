@@ -10,7 +10,6 @@ ENV ASPNETCORE_ENVIRONMENT=Development
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /src
 COPY ["VetClinicApi.API/VetClinicApi.API.csproj", "VetClinicApi.API/"]
-COPY ["ClassLibrary1/ClassLibrary1.csproj", "ClassLibrary1/"]
 RUN dotnet restore "VetClinicApi.API/VetClinicApi.API.csproj"
 COPY . .
 WORKDIR "/src/VetClinicApi.API"
