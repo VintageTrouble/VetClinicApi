@@ -3,14 +3,13 @@
 using Microsoft.AspNetCore.Mvc;
 using System.Net;
 
+using VetClinicApi.API.Controllers.Abstract;
+
 namespace VetClinicApi.API.Controllers;
 
-[ApiController]
-[Produces("application/json")]
-[ProducesResponseType(typeof(ProblemDetails), (int)HttpStatusCode.BadRequest)]
-[ProducesResponseType(typeof(ProblemDetails), (int)HttpStatusCode.InternalServerError)]
-[Route("api/migrations")]
-public class MigrationsController : ControllerBase
+
+[Route("api/[controller]")]
+public class MigrationsController : BaseController
 {
     private readonly IMigrationRunner _migrationRunner;
     private readonly IConfiguration _configuration;

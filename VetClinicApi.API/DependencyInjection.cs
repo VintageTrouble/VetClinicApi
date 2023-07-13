@@ -1,4 +1,5 @@
-﻿using VetClinicApi.API.Swagger;
+﻿using VetClinicApi.API.Common.Mappings;
+using VetClinicApi.API.Swagger;
 
 namespace VetClinicApi.API;
 
@@ -11,6 +12,7 @@ public static class DependencyInjection
         services.AddControllers();
 
         services.AddSwagger();
+        services.AddMappings();
 
         return services;
     }
