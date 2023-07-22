@@ -17,6 +17,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VetClinicApi.Application", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VetClinicApi.Application.Tests", "VetClinicApi.Application.Tests\VetClinicApi.Application.Tests.csproj", "{8417316A-5C0E-4B2F-B090-9B9F0755B752}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{E6DB347F-23BB-40A9-B823-54A223C299BB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -54,6 +56,10 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{5501030D-3CA2-4160-ABC0-592B91165A64} = {E6DB347F-23BB-40A9-B823-54A223C299BB}
+		{8417316A-5C0E-4B2F-B090-9B9F0755B752} = {E6DB347F-23BB-40A9-B823-54A223C299BB}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {425294A5-A8A8-40BB-A181-BDB1E9DFD494}
