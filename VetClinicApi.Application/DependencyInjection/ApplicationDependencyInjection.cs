@@ -1,5 +1,4 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-
 using VetClinicApi.Application.Services.CustomerHandlig;
 
 namespace VetClinicApi.Application.DependencyInjection;
