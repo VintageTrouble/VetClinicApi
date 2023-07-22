@@ -1,13 +1,4 @@
-﻿using Castle.Core.Resource;
-
-using FluentMigrator.Builders.IfDatabase;
-
-using FluentValidation;
-
-using Moq;
-
-using System.ComponentModel.DataAnnotations;
-using System.Data;
+﻿using Moq;
 
 using VetClinicApi.Application.Services.CustomerHandlig;
 using VetClinicApi.Core.Entities;
