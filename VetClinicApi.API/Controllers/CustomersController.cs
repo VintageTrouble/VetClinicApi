@@ -22,7 +22,7 @@ namespace VetClinicApi.API.Controllers
             _customerService = customerService;
         }
 
-        [HttpGet("get/id={id}")]
+        [HttpGet("get/id")]
         [ProducesResponseType(typeof(CustomerResponse), (int)HttpStatusCode.OK)]
         public async Task<IActionResult> GetCustomer(int id)
         {
@@ -34,6 +34,7 @@ namespace VetClinicApi.API.Controllers
 
         [HttpPost("create")]
         [ProducesResponseType(typeof(CustomerResponse), (int)HttpStatusCode.Created)]
+        [ProducesResponseType(typeof(ProblemDetails), (int)HttpStatusCode.Conflict)]
         public async Task<IActionResult> CreateCustomer(CreateCustomerRequest customerRequest)
         {
             var customer = _mapper.Map<Customer>(customerRequest);
@@ -45,6 +46,7 @@ namespace VetClinicApi.API.Controllers
 
         [HttpPost("update")]
         [ProducesResponseType(typeof(CustomerResponse), (int)HttpStatusCode.OK)]
+        [ProducesResponseType(typeof(ProblemDetails), (int)HttpStatusCode.Conflict)]
         public async Task<IActionResult> UpdateCustomer(UpdateCustomerRequest customerRequest)
         {
             var customer = _mapper.Map<Customer>(customerRequest);

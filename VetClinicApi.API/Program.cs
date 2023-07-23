@@ -25,6 +25,8 @@ var env = builder.Environment;
 
 var app = builder.Build();
 {
+    app.UseExceptionHandler("/api/error");
+
     app.UseAuthentication();
     app.UseAuthorization();
 
