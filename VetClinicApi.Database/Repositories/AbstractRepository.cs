@@ -53,6 +53,7 @@ namespace VetClinicApi.Database.Repositories
                 }
                 var result = context.Update(entity);
                 context.SaveChanges();
+
                 return result.Entity;
             }
         }
