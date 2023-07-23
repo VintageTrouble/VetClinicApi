@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 
 using VetClinicApi.API.Controllers.Abstract;
 using VetClinicApi.Contracts.CustomerContracts;
+using VetClinicApi.Core.Entities;
 
 namespace VetClinicApi.API.Controllers
 {
@@ -26,12 +27,14 @@ namespace VetClinicApi.API.Controllers
         [HttpPost("create")]
         public async Task<IActionResult> CreateCustomer(CreateCustomerRequest customerRequest)
         {
+            var customer = _mapper.Map<Customer>(customerRequest);
             throw new NotImplementedException();
         }
 
         [HttpPost("update")]
         public async Task<IActionResult> UpdateCustomer(UpdateCustomerRequest customerRequest)
         {
+            var customer = _mapper.Map<Customer>(customerRequest);
             throw new NotImplementedException();
         }
     }

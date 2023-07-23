@@ -11,6 +11,9 @@
 
   <ItemGroup>
     <PackageReference Include="FluentMigrator.Runner" Version="3.3.2" />
+    <PackageReference Include="FluentValidation" Version="11.6.0" />
+    <PackageReference Include="FluentValidation.AspNetCore" Version="11.3.0" />
+    <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="11.6.0" />
     <PackageReference Include="Mapster" Version="7.3.0" />
     <PackageReference Include="Mapster.Core" Version="1.2.0" />
     <PackageReference Include="Mapster.DependencyInjection" Version="1.0.0" />
@@ -40,6 +43,11 @@
   <ItemGroup>
     <ProjectReference Include="..\VetClinicApi.Application\VetClinicApi.Application.csproj" />
     <ProjectReference Include="..\VetClinicApi.Contracts\VetClinicApi.Contracts.csproj" />
+    <ProjectReference Include="..\VetClinicApi.Core\VetClinicApi.Core.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Common\Validation\ValidationExceptions\" />
   </ItemGroup>
 
 </Project>

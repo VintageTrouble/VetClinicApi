@@ -6,5 +6,5 @@
         string FirstName,
         string PassportNumber,
         string PhoneNumber,
-        DateTime BirthDate);
+        DateTime BirthDate) : BaseCustomerRequest(LastName, FirstName, PassportNumber, PhoneNumber, BirthDate);
 }

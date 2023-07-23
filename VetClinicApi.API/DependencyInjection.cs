@@ -1,5 +1,9 @@
-﻿using VetClinicApi.API.Common.Mappings;
+﻿using FluentValidation.AspNetCore;
+using FluentValidation;
+
+using VetClinicApi.API.Common.Mappings;
 using VetClinicApi.API.Swagger;
+using VetClinicApi.API.Common;
 
 namespace VetClinicApi.API;
 
@@ -13,6 +17,9 @@ public static class DependencyInjection
 
         services.AddSwagger();
         services.AddMappings();
+
+        services.AddFluentValidationAutoValidation();
+        services.AddValidatorsFromAssemblyContaining<IAssemblyMarker>();
 
         return services;
     }
