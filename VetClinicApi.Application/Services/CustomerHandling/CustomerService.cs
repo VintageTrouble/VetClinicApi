@@ -36,7 +36,11 @@ namespace VetClinicApi.Application.Services.CustomerHandlig
 
         public Customer GetCustomer(int id)
         {
-            return _repository.GetById(id);
+            if(_repository.GetById(id) is not Customer customer)
+            {
+                throw new ArgumentOutOfRangeException("Customer ID is not exist");
+            }
+            return customer;
         }
     }
 }

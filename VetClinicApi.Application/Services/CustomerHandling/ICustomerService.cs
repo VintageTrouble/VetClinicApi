@@ -12,5 +12,6 @@ namespace VetClinicApi.Application.Services.CustomerHandlig
     {
         Customer CreateCustomer(Customer customer);
         Customer UpdateCustomer(Customer customer);
+        Customer GetCustomer(int Id);
     }
 }

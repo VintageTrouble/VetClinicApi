@@ -15,7 +15,7 @@ namespace VetClinicApi.Application.Tests.Services.CustomerHandling
 
 
         [Fact]
-        public void CreateCustomer_ValidPerson_Test()
+        public void Create_ValidPerson_Test()
         {
             var customer = new Customer()
             {
@@ -43,7 +43,7 @@ namespace VetClinicApi.Application.Tests.Services.CustomerHandling
             Customer customer = null;
             _repository.Setup(x => x.Add(It.IsAny<Customer>())).Returns(customer);
             _customerService = new CustomerService(_repository.Object);
-            Assert.Throws<ArgumentNullException>(() => _customerService.UpdateCustomer(null));
+            Assert.Throws<ArgumentNullException>(() => _customerService.CreateCustomer(null));
         }
 
         [Fact]
@@ -78,6 +78,14 @@ namespace VetClinicApi.Application.Tests.Services.CustomerHandling
             _repository.Setup(x => x.Update(It.IsAny<Customer>())).Returns(customer);
             _customerService = new CustomerService(_repository.Object);
             Assert.Throws<ArgumentNullException>(() => _customerService.UpdateCustomer(null));
+        }
+
+        [Fact]
+        public void Get_IdIsNotExist_Test()
+        {
+            _repository.Setup(x => x.GetById(It.IsAny<int>())).Returns<Customer>(null);
+            _customerService = new CustomerService(_repository.Object);
+            Assert.Throws<ArgumentOutOfRangeException>(() => _customerService.GetCustomer(1));
         }
 
     }
