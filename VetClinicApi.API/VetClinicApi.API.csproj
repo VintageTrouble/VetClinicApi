@@ -46,8 +46,4 @@
     <ProjectReference Include="..\VetClinicApi.Core\VetClinicApi.Core.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Common\Validation\ValidationExceptions\" />
-  </ItemGroup>
-
 </Project>

@@ -1,19 +1,16 @@
 ﻿using FluentValidation;
 using FluentValidation.TestHelper;
 
-using Newtonsoft.Json.Linq;
-
 using VetClinicApi.API.Common.Validation.CustomerValidation;
 using VetClinicApi.Contracts.CustomerContracts;
 
 using Xunit;
-using Xunit.Abstractions;
 
 namespace VetClinicApi.API.Tests.Common.Validation;
 
 public class UpdateCustomerRequsetValidator_Test
 {
-    private IValidator<UpdateCustomerRequest> _validator;
+    private readonly IValidator<UpdateCustomerRequest> _validator;
 
     public UpdateCustomerRequsetValidator_Test()
     {

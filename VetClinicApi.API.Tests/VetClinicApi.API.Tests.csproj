@@ -24,10 +24,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\VetClinicApi.API\VetClinicApi.API.csproj" />
     <ProjectReference Include="..\VetClinicApi.Contracts\VetClinicApi.Contracts.csproj" />
   </ItemGroup>

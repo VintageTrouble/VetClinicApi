@@ -5,13 +5,12 @@ using VetClinicApi.API.Common.Validation.CustomerValidation;
 using VetClinicApi.Contracts.CustomerContracts;
 
 using Xunit;
-using Xunit.Abstractions;
 
 namespace VetClinicApi.API.Tests.Common.Validation;
 
 public class CreateCustomerRequsetValidator_Test
 {
-    private IValidator<CreateCustomerRequest> _validator;
+    private readonly IValidator<CreateCustomerRequest> _validator;
     private static IEnumerable<object[]> InvalidCreateCustomerRequests()
     {
         //Empty last name

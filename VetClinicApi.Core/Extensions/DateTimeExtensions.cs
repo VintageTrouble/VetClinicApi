@@ -1,29 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿namespace VetClinicApi.Core.Extensions;
 
-namespace VetClinicApi.Core.Extensions
+public static class DateTimeExtensions
 {
-    public static class DateTimeExtensions
-    {
-        public static DateTime ToUtcKind(this DateTime dateTime) =>
+    public static DateTime ToUtcKind(this DateTime dateTime) =>
         dateTime.ToKind(DateTimeKind.Utc);
 
-        public static DateTime? ToUtcKind(this DateTime? dateTime) =>
-            dateTime.ToKind(DateTimeKind.Utc);
+    public static DateTime? ToUtcKind(this DateTime? dateTime) =>
+        dateTime.ToKind(DateTimeKind.Utc);
 
-        public static DateTime ToUnspecifiedKind(this DateTime dateTime) =>
-            dateTime.ToKind(DateTimeKind.Unspecified);
+    public static DateTime ToUnspecifiedKind(this DateTime dateTime) =>
+        dateTime.ToKind(DateTimeKind.Unspecified);
 
-        public static DateTime? ToUnspecifiedKind(this DateTime? dateTime) =>
-            dateTime.ToKind(DateTimeKind.Unspecified);
+    public static DateTime? ToUnspecifiedKind(this DateTime? dateTime) =>
+        dateTime.ToKind(DateTimeKind.Unspecified);
 
-        public static DateTime ToKind(this DateTime dateTime, DateTimeKind kind) =>
-            DateTime.SpecifyKind(dateTime, kind);
+    public static DateTime ToKind(this DateTime dateTime, DateTimeKind kind) =>
+        DateTime.SpecifyKind(dateTime, kind);
 
-        public static DateTime? ToKind(this DateTime? dateTime, DateTimeKind kind) =>
-            dateTime?.ToKind(kind);
-    }
+    public static DateTime? ToKind(this DateTime? dateTime, DateTimeKind kind) =>
+        dateTime?.ToKind(kind);
 }

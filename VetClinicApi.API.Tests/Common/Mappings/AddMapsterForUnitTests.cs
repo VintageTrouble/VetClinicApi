@@ -2,15 +2,14 @@
 
 using MapsterMapper;
 
-namespace VetClinicApi.API.Tests.Common.Mappings
+namespace VetClinicApi.API.Tests.Common.Mappings;
+
+internal static class AddMapsterForUnitTests
 {
-    internal static class AddMapsterForUnitTests
+    public static Mapper GetMapper()
     {
-        public static Mapper GetMapper()
-        {
-            var config = TypeAdapterConfig.GlobalSettings;
-            config.Scan(typeof(API.Common.IAssemblyMarker).Assembly);
-            return new Mapper(config);
-        }
+        var config = TypeAdapterConfig.GlobalSettings;
+        config.Scan(typeof(API.Common.IAssemblyMarker).Assembly);
+        return new Mapper(config);
     }
 }

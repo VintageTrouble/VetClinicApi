@@ -20,7 +20,7 @@ public class MigrationsController : BaseController
         _configuration = configuration;
     }
 
-    [HttpGet("up")]
+    [HttpPatch("up")]
     public IActionResult Up(int targetVersion)
     {
         return HandleMigration(() => {
@@ -38,7 +38,7 @@ public class MigrationsController : BaseController
         });
     }
 
-    [HttpGet("down")]
+    [HttpPatch("down")]
     public IActionResult Down(int targetVersion)
     {
         return HandleMigration(() =>
@@ -57,7 +57,7 @@ public class MigrationsController : BaseController
         });
     }
 
-    [HttpGet("drop")]
+    [HttpPatch("drop")]
     public IActionResult Drop()
     {
         return HandleMigration(() =>
@@ -68,7 +68,7 @@ public class MigrationsController : BaseController
         });
     }
 
-    [HttpGet("max")]
+    [HttpPatch("max")]
     public IActionResult Max()
     {
         return HandleMigration(() =>
