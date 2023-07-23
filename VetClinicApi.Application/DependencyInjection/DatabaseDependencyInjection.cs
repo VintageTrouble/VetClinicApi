@@ -14,7 +14,7 @@ public static class DatabaseDependencyInjection
         services.AddDbContextFactory<VetClinicContext>(options =>
             options.UseNpgsql(connectionString));
 
-        services.AddScoped<IAbstractRepository<Customer>, AbstractRepository<Customer>>();
+        services.AddScoped<ICustomerRepository, CustomerRepository>();
 
         return services;
     }
