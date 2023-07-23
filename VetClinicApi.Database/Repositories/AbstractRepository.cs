@@ -10,8 +10,7 @@ using VetClinicApi.Core.Entities;
 
 namespace VetClinicApi.Database.Repositories
 {
-    public abstract class AbstractRepository<TEntity>
-        where TEntity : class, IEntity
+    public abstract class AbstractRepository<TEntity> : IAbstractRepository<TEntity> where TEntity : class, IEntity
     {
         protected IDbContextFactory<VetClinicContext> _contextFactory;
         public AbstractRepository(IDbContextFactory<VetClinicContext> contextFactory)
