@@ -5,7 +5,11 @@
       "launchBrowser": true,
       "launchUrl": "swagger",
       "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "POSTGRES_DB": "vetclinic_db",
+        "POSTGRES_USER": "db_user",
+        "POSTGRES_PASSWORD": "pass123",
+        "POSTGRES_ADDRESS": "localhost"
       },
       "dotnetRunMessages": true,
       "applicationUrl": "https://localhost:7261;http://localhost:5261"
