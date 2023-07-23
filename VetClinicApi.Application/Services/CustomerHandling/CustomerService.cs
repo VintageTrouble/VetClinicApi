@@ -25,8 +25,8 @@ namespace VetClinicApi.Application.Services.CustomerHandlig
                 throw new PassportNumberConflictExceprion("PassportNumber are already in use.");
             }
 
-            customer.RegistrationDate = DateTime.UtcNow;
-            customer.LastEditDate = DateTime.UtcNow;
+            customer.RegistrationDate = DateTime.Today;
+            customer.LastEditDate = DateTime.Today;
             customer.LastVisitDate = null;
 
             return _repository.Add(customer);
