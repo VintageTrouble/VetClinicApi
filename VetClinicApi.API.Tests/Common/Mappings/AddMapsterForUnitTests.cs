@@ -9,7 +9,8 @@ internal static class AddMapsterForUnitTests
     public static Mapper GetMapper()
     {
         var config = TypeAdapterConfig.GlobalSettings;
-        config.Scan(typeof(API.Common.IAssemblyMarker).Assembly);
+        config.Scan(typeof(IAssemblyMarker).Assembly);
+
         return new Mapper(config);
     }
 }

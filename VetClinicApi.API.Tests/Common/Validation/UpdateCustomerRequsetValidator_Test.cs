@@ -28,6 +28,7 @@ public class UpdateCustomerRequsetValidator_Test
                 "TestFirstname",
                 "0000 000000",
                 "+7 (999) 999-99-99",
+                new DateTime(2000, 1, 1),
                 new DateTime(2000, 1, 1)),
             "Id"
         };
@@ -40,6 +41,7 @@ public class UpdateCustomerRequsetValidator_Test
                 "TestFirstname",
                 "0000 000000",
                 "+7 (999) 999-99-99",
+                new DateTime(2000, 1, 1),
                 new DateTime(2000, 1, 1)),
             "LastName"
         };
@@ -52,6 +54,7 @@ public class UpdateCustomerRequsetValidator_Test
                 "",
                 "0000 000000",
                 "+7 (999) 999-99-99",
+                new DateTime(2000, 1, 1),
                 new DateTime(2000, 1, 1)),
             "FirstName"
         };
@@ -64,6 +67,7 @@ public class UpdateCustomerRequsetValidator_Test
                 "TestFirstname",
                 "",
                 "+7 (999) 999-99-99",
+                new DateTime(2000, 1, 1),
                 new DateTime(2000, 1, 1)),
             "PassportNumber"
         };
@@ -76,6 +80,7 @@ public class UpdateCustomerRequsetValidator_Test
                 "TestFirstname",
                 "0",
                 "+7 (999) 999-99-99",
+                new DateTime(2000, 1, 1), 
                 new DateTime(2000, 1, 1)),
             "PassportNumber"
         };
@@ -88,6 +93,7 @@ public class UpdateCustomerRequsetValidator_Test
                 "TestFirstname",
                 "0000 000000",
                 "",
+                new DateTime(2000, 1, 1),
                 new DateTime(2000, 1, 1)),
             "PhoneNumber"
         };
@@ -100,6 +106,7 @@ public class UpdateCustomerRequsetValidator_Test
                 "TestFirstname",
                 "0000 000000",
                 "000",
+                new DateTime(2000, 1, 1),
                 new DateTime(2000, 1, 1)),
             "PhoneNumber"
         };
@@ -112,7 +119,8 @@ public class UpdateCustomerRequsetValidator_Test
                 "TestFirstname",
                 "0000 000000",
                 "+7 (999) 999-99-99",
-                DateTime.MinValue),
+                DateTime.MinValue,
+                new DateTime(2000, 1, 1)),
             "BirthDate"
         };
         //Too young person
@@ -124,8 +132,22 @@ public class UpdateCustomerRequsetValidator_Test
                 "TestFirstname",
                 "0000 000000",
                 "+7 (999) 999-99-99",
-                DateTime.Today),
+                DateTime.Today, 
+                new DateTime(2000, 1, 1)),
             "BirthDate"
+        };
+        //Last visit in future
+        yield return new object[]
+        {
+            new UpdateCustomerRequest(
+                1,
+                "TestLastName",
+                "TestFirstname",
+                "0000 000000",
+                "+7 (999) 999-99-99",
+                DateTime.Today,
+                DateTime.Today.AddDays(1)),
+            "LastVisitDate"
         };
     }
 
@@ -138,6 +160,7 @@ public class UpdateCustomerRequsetValidator_Test
             "TestFirstname",
             "0000 000000",
             "+7 (999) 999-99-99",
+            new DateTime(2000, 1, 1),
             new DateTime(2000, 1, 1));
 
         var result = _validator.TestValidate(customer);

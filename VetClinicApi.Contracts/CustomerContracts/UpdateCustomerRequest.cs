@@ -6,4 +6,5 @@ public record UpdateCustomerRequest(
     string FirstName,
     string PassportNumber,
     string PhoneNumber,
-    DateTime BirthDate) : BaseCustomerRequest(LastName, FirstName, PassportNumber, PhoneNumber, BirthDate);
+    DateTime BirthDate,
+    DateTime? LastVisitDate) : BaseCustomerRequest(LastName, FirstName, PassportNumber, PhoneNumber, BirthDate);
