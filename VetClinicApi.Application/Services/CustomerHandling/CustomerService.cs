@@ -40,7 +40,6 @@ public class CustomerService : ICustomerService
             throw new ValueTurnsToNullException(nameof(customer.LastVisitDate));
 
         customer.LastEditDate = DateTime.Today;
-        customer.LastVisitDate = databaseCustomer.LastVisitDate;
         customer.RegistrationDate = databaseCustomer.RegistrationDate;
         try
         {

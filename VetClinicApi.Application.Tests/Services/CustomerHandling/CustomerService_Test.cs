@@ -99,7 +99,6 @@ public class Test
 
         Assert.Equal(DateTime.Today, result.LastEditDate);
         Assert.Equal(databaseCustomer.RegistrationDate, result.RegistrationDate);
-        Assert.Equal(databaseCustomer.LastVisitDate, result.LastVisitDate);
     }
 
     [Fact]
