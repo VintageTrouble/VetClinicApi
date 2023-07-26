@@ -3,14 +3,13 @@
 using Microsoft.AspNetCore.Mvc;
 using System.Net;
 
+using VetClinicApi.API.Controllers.Abstract;
+
 namespace VetClinicApi.API.Controllers;
 
-[ApiController]
-[Produces("application/json")]
-[ProducesResponseType(typeof(ProblemDetails), (int)HttpStatusCode.BadRequest)]
-[ProducesResponseType(typeof(ProblemDetails), (int)HttpStatusCode.InternalServerError)]
-[Route("api/migrations")]
-public class MigrationsController : ControllerBase
+
+[Route("api/[controller]")]
+public class MigrationsController : BaseController
 {
     private readonly IMigrationRunner _migrationRunner;
     private readonly IConfiguration _configuration;
@@ -21,7 +20,7 @@ public class MigrationsController : ControllerBase
         _configuration = configuration;
     }
 
-    [HttpGet("up")]
+    [HttpPatch("up")]
     public IActionResult Up(int targetVersion)
     {
         return HandleMigration(() => {
@@ -39,7 +38,7 @@ public class MigrationsController : ControllerBase
         });
     }
 
-    [HttpGet("down")]
+    [HttpPatch("down")]
     public IActionResult Down(int targetVersion)
     {
         return HandleMigration(() =>
@@ -58,7 +57,7 @@ public class MigrationsController : ControllerBase
         });
     }
 
-    [HttpGet("drop")]
+    [HttpPatch("drop")]
     public IActionResult Drop()
     {
         return HandleMigration(() =>
@@ -69,7 +68,7 @@ public class MigrationsController : ControllerBase
         });
     }
 
-    [HttpGet("max")]
+    [HttpPatch("max")]
     public IActionResult Max()
     {
         return HandleMigration(() =>

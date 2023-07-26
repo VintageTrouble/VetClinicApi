@@ -4,13 +4,13 @@ using Microsoft.Extensions.DependencyInjection;
 
 using VetClinicApi.Database.Migrations.Common;
 
-namespace VetClinicApi.Database.Migrations
+namespace VetClinicApi.Database.Migrations;
+
+public static class MigratorFactory
 {
-    public static class MigratorFactory
+    public static IMigrationRunner CreateRunner(string connectionString)
     {
-        public static IMigrationRunner CreateRunner(string connectionString)
-        {
-            var migrator = new ServiceCollection()
+        var migrator = new ServiceCollection()
             .AddFluentMigratorCore()
             .ConfigureRunner(rb => rb
                 .AddPostgres()
@@ -19,10 +19,9 @@ namespace VetClinicApi.Database.Migrations
             .AddLogging(lb => lb.AddFluentMigratorConsole())
             .BuildServiceProvider(false);
 
-            var scope = migrator.CreateScope();
-            var runner = scope.ServiceProvider.GetRequiredService<IMigrationRunner>();
+        var scope = migrator.CreateScope();
+        var runner = scope.ServiceProvider.GetRequiredService<IMigrationRunner>();
 
-            return runner;
-        }
+        return runner;
     }
 }
