@@ -10,7 +10,7 @@ public class CustomerService : ICustomerService
 
     public CustomerService(ICustomerRepository repository)
     {
-        _repository = repository; 
+        _repository = repository;
     }
 
     public Customer CreateCustomer(Customer? customer)
@@ -33,9 +33,17 @@ public class CustomerService : ICustomerService
         if (customer == null)
             throw new ArgumentNullException(nameof(customer), "Customer can't be null.");
 
+        if (_repository.GetById(customer.Id) is not Customer databaseCustomer)
+            throw new CustomerNotFoundException(customer.Id);
+
+        if (databaseCustomer.LastVisitDate is not null && customer.LastVisitDate is null)
+            throw new ValueTurnsToNullException(nameof(customer.LastVisitDate));
+
+        customer.LastEditDate = DateTime.Today;
+        customer.LastVisitDate = databaseCustomer.LastVisitDate;
+        customer.RegistrationDate = databaseCustomer.RegistrationDate;
         try
         {
-            customer.LastEditDate = DateTime.Today;
             return _repository.Update(customer);
         }
         catch (ArgumentOutOfRangeException)
