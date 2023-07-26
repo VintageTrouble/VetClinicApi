@@ -11,6 +11,7 @@ public class UpdateCustomerRequestValidator : BaseCustomerRequestValidator<Updat
         RuleFor(x => x.Id)
             .GreaterThan(0);
         RuleFor(x => x.LastVisitDate)
-            .LessThanOrEqualTo(DateTime.UtcNow);
+            .LessThanOrEqualTo(DateTime.UtcNow)
+            .When(x => x.LastVisitDate.HasValue);
     }
 }

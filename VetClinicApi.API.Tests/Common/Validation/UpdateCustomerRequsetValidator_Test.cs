@@ -17,7 +17,33 @@ public class UpdateCustomerRequsetValidator_Test
         _validator = new UpdateCustomerRequestValidator();
     }
 
-    private static IEnumerable<object[]> InvalidCreateCustomerRequests()
+    private static IEnumerable<object[]> ValidRequests()
+    {
+        yield return new object[]
+        {
+            new UpdateCustomerRequest(
+                1,
+                "TestLastName",
+                "TestFirstname",
+                "0000 000000",
+                "+7 (999) 999-99-99",
+                new DateTime(2000, 1, 1),
+                new DateTime(2000, 1, 1))
+        };
+        yield return new object[]
+        {
+            new UpdateCustomerRequest(
+                1,
+                "TestLastName",
+                "TestFirstname",
+                "0000 000000",
+                "+7 (999) 999-99-99",
+                new DateTime(2000, 1, 1),
+                null)
+        };
+    }
+
+    private static IEnumerable<object[]> InvalidRequests()
     {
         //Invalid Id
         yield return new object[]
@@ -151,25 +177,17 @@ public class UpdateCustomerRequsetValidator_Test
         };
     }
 
-    [Fact]
-    public void Validate_ValidData_ShouldPass_Test()
+    [Theory]
+    [MemberData(nameof(ValidRequests))]
+    public void Validate_ValidData_ShouldPass_Test(UpdateCustomerRequest customer)
     {
-        var customer = new UpdateCustomerRequest(
-            1,
-            "TestLastName",
-            "TestFirstname",
-            "0000 000000",
-            "+7 (999) 999-99-99",
-            new DateTime(2000, 1, 1),
-            new DateTime(2000, 1, 1));
-
         var result = _validator.TestValidate(customer);
 
         Assert.True(result.IsValid);
     }
 
     [Theory]
-    [MemberData(nameof(InvalidCreateCustomerRequests))]
+    [MemberData(nameof(InvalidRequests))]
     public void Validate_InvalidData_ShouldNotPass_Test(UpdateCustomerRequest customer, string memberName)
     {
         var result = _validator.TestValidate(customer);
