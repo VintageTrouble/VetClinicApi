@@ -1,15 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿namespace VetClinicApi.Database.Migrations;
 
-namespace VetClinicApi.Database.Migrations
+public static class MigrationVersioning
 {
-    public static class MigrationVersioning
-    {
-        public const long MaxVersion = CreateCustomerTable;
+    public const long MaxVersion = CreateCustomerTable;
 
-        public const long CreateCustomerTable = 1;
-    }
+    public const long CreateCustomerTable = 1;
 }

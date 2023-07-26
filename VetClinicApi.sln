@@ -9,11 +9,23 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VetClinicApi.API.Tests", "V
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VetClinicApi.Database", "VetClinicApi.Database\VetClinicApi.Database.csproj", "{702F42B0-C6B8-425E-AAFE-FBAA20696CB5}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VetClinicApi.Core", "VetClinicApi.Core\VetClinicApi.Core.csproj", "{646811F7-ECE0-4021-86A8-004A1D626A68}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VetClinicApi.Database.Migrations", "VetClinicApi.Database.Migrations\VetClinicApi.Database.Migrations.csproj", "{AE2370E2-59F0-4780-ADE4-B54E62BE9771}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VetClinicApi.Application", "VetClinicApi.Application\VetClinicApi.Application.csproj", "{1B1F4B78-2FE9-4144-AA18-F1EEE15E04F6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VetClinicApi.Core", "VetClinicApi.Core\VetClinicApi.Core.csproj", "{646811F7-ECE0-4021-86A8-004A1D626A68}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VetClinicApi.Application", "VetClinicApi.Application\VetClinicApi.Application.csproj", "{1B1F4B78-2FE9-4144-AA18-F1EEE15E04F6}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VetClinicApi.Application.Tests", "VetClinicApi.Application.Tests\VetClinicApi.Application.Tests.csproj", "{8417316A-5C0E-4B2F-B090-9B9F0755B752}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VetClinicApi.Contracts", "VetClinicApi.Contracts\VetClinicApi.Contracts.csproj", "{858244A3-47A7-4BE1-9833-5B218CC55774}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{E08C8835-E950-4EE3-9731-1100F73D26E6}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docker", "docker", "{A320309F-56EB-447D-A725-282BBE078F20}"
+	ProjectSection(SolutionItems) = preProject
+		docker\docker-build.ps1 = docker\docker-build.ps1
+		docker\docker-compose.yml = docker\docker-compose.yml
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,9 +57,21 @@ Global
 		{1B1F4B78-2FE9-4144-AA18-F1EEE15E04F6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1B1F4B78-2FE9-4144-AA18-F1EEE15E04F6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1B1F4B78-2FE9-4144-AA18-F1EEE15E04F6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{858244A3-47A7-4BE1-9833-5B218CC55774}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{858244A3-47A7-4BE1-9833-5B218CC55774}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{858244A3-47A7-4BE1-9833-5B218CC55774}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{858244A3-47A7-4BE1-9833-5B218CC55774}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8417316A-5C0E-4B2F-B090-9B9F0755B752}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8417316A-5C0E-4B2F-B090-9B9F0755B752}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8417316A-5C0E-4B2F-B090-9B9F0755B752}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8417316A-5C0E-4B2F-B090-9B9F0755B752}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{5501030D-3CA2-4160-ABC0-592B91165A64} = {E08C8835-E950-4EE3-9731-1100F73D26E6}
+		{8417316A-5C0E-4B2F-B090-9B9F0755B752} = {E08C8835-E950-4EE3-9731-1100F73D26E6}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {425294A5-A8A8-40BB-A181-BDB1E9DFD494}

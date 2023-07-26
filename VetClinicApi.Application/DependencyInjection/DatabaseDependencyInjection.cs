@@ -2,6 +2,7 @@
 using Microsoft.Extensions.DependencyInjection;
 
 using VetClinicApi.Database;
+using VetClinicApi.Database.Repositories;
 
 namespace VetClinicApi.Application.DependencyInjection;
 
@@ -11,6 +12,8 @@ public static class DatabaseDependencyInjection
     {
         services.AddDbContextFactory<VetClinicContext>(options =>
             options.UseNpgsql(connectionString));
+
+        services.AddScoped<ICustomerRepository, CustomerRepository>();
 
         return services;
     }
