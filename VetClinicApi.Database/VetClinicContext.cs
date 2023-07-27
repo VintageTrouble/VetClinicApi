@@ -39,6 +39,35 @@ public class VetClinicContext : DbContext
                     src => src.ToUnspecifiedKind(),
                     dst => dst.ToUnspecifiedKind());
 
+        modelBuilder.Entity<Animal>()
+            .ToTable("T_Animal")
+            .HasKey(x => x.Id);
+
+        modelBuilder.Entity<Animal>()
+            .Property(x => x.BirthDate)
+                .HasConversion(
+                    src => src.ToUnspecifiedKind(),
+                    dst => dst.ToUnspecifiedKind());
+        modelBuilder.Entity<Animal>()
+            .Property(x => x.RegistrationDate)
+                .HasConversion(
+                    src => src.ToUnspecifiedKind(),
+                    dst => dst.ToUnspecifiedKind());
+        modelBuilder.Entity<Animal>()
+            .Property(x => x.LastEditDate)
+                .HasConversion(
+                    src => src.ToUnspecifiedKind(),
+                    dst => dst.ToUnspecifiedKind());
+
+        modelBuilder.Entity<Animal>()
+            .HasOne(x => x.Customer)
+            .WithMany()
+            .HasForeignKey(x => x.CustomerId);
+        modelBuilder.Entity<Animal>()
+           .HasOne(x => x.AnimalType)
+           .WithMany()
+           .HasForeignKey(x => x.AnimalTypeId);
+
         base.OnModelCreating(modelBuilder);
     }
 }

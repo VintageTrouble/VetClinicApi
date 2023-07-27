@@ -4,7 +4,6 @@ using VetClinicApi.Application.Common.Exceptions;
 using VetClinicApi.Application.Services.CustomerHandlig;
 using VetClinicApi.Core.Entities;
 using VetClinicApi.Database.Repositories;
-
 using Xunit;
 
 namespace VetClinicApi.Application.Tests.Services.CustomerHandling;

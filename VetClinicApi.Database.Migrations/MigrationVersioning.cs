@@ -2,7 +2,8 @@
 
 public static class MigrationVersioning
 {
-    public const long MaxVersion = CreateCustomerTable;
+    public const long MaxVersion = CreateAnimalTable;
 
     public const long CreateCustomerTable = 1;
+    public const long CreateAnimalTable = 2;
 }
