@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 
+using VetClinicApi.Core.Entities;
 using VetClinicApi.Database;
 using VetClinicApi.Database.Repositories;
 
@@ -14,6 +15,8 @@ public static class DatabaseDependencyInjection
             options.UseNpgsql(connectionString));
 
         services.AddScoped<ICustomerRepository, CustomerRepository>();
+        services.AddScoped<IAnimalRepository, AnimalRepository>();
+        services.AddScoped<IAbstractRepository<AnimalType>, AnimalTypeRepository>();
 
         return services;
     }

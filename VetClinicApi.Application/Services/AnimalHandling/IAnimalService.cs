@@ -1,12 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using VetClinicApi.Core.Entities;
 
-namespace VetClinicApi.Application.Services.AnimalHandling
+namespace VetClinicApi.Application.Services.AnimalHandling;
+
+public interface IAnimalService
 {
-    internal interface IAnimalService
-    {
-    }
+    Animal CreateAnimal(Animal animal);
+    Animal UpdateAnimal(Animal animal);
+    Animal GetAnimal(int id);
+    void DeleteAnimal(int id);
+    AnimalType CreateAnimalType(AnimalType animalType);
+    void DeleteAnimalType(int id);
+    IEnumerable<AnimalType> GetAllAnimalType();
 }

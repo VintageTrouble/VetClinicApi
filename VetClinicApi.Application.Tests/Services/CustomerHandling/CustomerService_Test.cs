@@ -8,7 +8,7 @@ using Xunit;
 
 namespace VetClinicApi.Application.Tests.Services.CustomerHandling;
 
-public class Test
+public class CustomerService_Test
 {
     private readonly Mock<ICustomerRepository> _repository = new();
 

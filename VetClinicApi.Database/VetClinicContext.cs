@@ -8,6 +8,8 @@ namespace VetClinicApi.Database;
 public class VetClinicContext : DbContext
 {
     public virtual DbSet<Customer> Customers { get; set; }
+    public virtual DbSet<Animal> Animals { get; set; }
+    public virtual DbSet<AnimalType> AnimalTypes { get; set; }
     public VetClinicContext(DbContextOptions<VetClinicContext> contextOptions) : base(contextOptions)
     {
         AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
