@@ -8,7 +8,8 @@ public interface IAnimalService
     Animal UpdateAnimal(Animal animal);
     Animal GetAnimal(int id);
     void DeleteAnimal(int id);
+    IEnumerable<Animal> GetAnimalsByCustomer(int id);
     AnimalType CreateAnimalType(AnimalType animalType);
     void DeleteAnimalType(int id);
-    IEnumerable<AnimalType> GetAllAnimalType();
+    IEnumerable<AnimalType> GetAllAnimalTypes();
 }

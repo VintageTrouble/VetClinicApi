@@ -65,6 +65,10 @@ public class AnimalService : IAnimalService
             throw new AnimalNotFoundException(animal.Id);
         }
     }
+    public IEnumerable<Animal> GetAnimalsByCustomer(int id)
+    {
+        return _animalRepository.GetAll(x => x.CustomerId == id);
+    }
 
     //AnimalTypeMethods
     public AnimalType CreateAnimalType(AnimalType? animalType)
