@@ -86,7 +86,7 @@ public class AnimalService : IAnimalService
         }
     }
 
-    public IEnumerable<AnimalType> GetAllAnimalType()
+    public IEnumerable<AnimalType> GetAllAnimalTypes()
     {
         return _animalTypeRepository.GetAll();
     }
