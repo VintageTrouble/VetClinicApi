@@ -27,6 +27,6 @@ public class Migration_003_CreateAnimalTable : Migration
     {
         Delete.ForeignKey("FK_AnimalAnimalType");
         Delete.ForeignKey("FK_AnimalCustomer");
-        Delete.Table("T_AnimalType");
+        Delete.Table("T_Animal");
     }
 }

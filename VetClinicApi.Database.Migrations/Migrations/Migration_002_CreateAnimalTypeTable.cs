@@ -7,14 +7,12 @@ public class Migration_002_CreateAnimalTypeTable : Migration
 {
     public override void Up()
     {
-        Create.ForeignKey("FK_AnimalCustomer")
-            .FromTable("T_Animal").ForeignColumn("CustomerId").ToTable("T_Customer").PrimaryColumn("Id");
-        Create.ForeignKey("FK_AnimalAnimalType")
-            .FromTable("T_Animal").ForeignColumn("AnimalTypeId").ToTable("T_AnimalType").PrimaryColumn("Id");
+        Create.Table("T_AnimalType")
+               .WithColumn("Id").AsInt32().PrimaryKey().Identity()
+               .WithColumn("Name").AsString().NotNullable();
     }
     public override void Down()
     {
-        Delete.ForeignKey("FK_AnimalAnimalType");
         Delete.Table("T_AnimalType");
     }
 }
