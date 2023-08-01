@@ -1,15 +1,9 @@
 ﻿using FluentMigrator;
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
 namespace VetClinicApi.Database.Migrations.Migrations;
 
 [Migration(MigrationVersioning.CreateAnimalTable)]
-public class Migration_002_CreateAnimalTable : Migration
+public class Migration_003_CreateAnimalTable : Migration
 {
     public override void Up()
     {
@@ -23,9 +17,6 @@ public class Migration_002_CreateAnimalTable : Migration
             .WithColumn("IsVaccinate").AsBoolean().NotNullable()
             .WithColumn("RegistrationDate").AsDateTime().NotNullable()
             .WithColumn("LastEditDate").AsDateTime().NotNullable();
-        Create.Table("T_AnimalType")
-            .WithColumn("Id").AsInt32().PrimaryKey().Identity()
-            .WithColumn("Name").AsString().NotNullable();
 
         Create.ForeignKey("FK_AnimalCustomer")
             .FromTable("T_Animal").ForeignColumn("CustomerId").ToTable("T_Customer").PrimaryColumn("Id");
@@ -37,6 +28,5 @@ public class Migration_002_CreateAnimalTable : Migration
         Delete.ForeignKey("FK_AnimalAnimalType");
         Delete.ForeignKey("FK_AnimalCustomer");
         Delete.Table("T_AnimalType");
-        Delete.Table("T_Animal");
     }
 }
