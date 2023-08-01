@@ -4,12 +4,11 @@ using VetClinicApi.Application.Common.Exceptions;
 using VetClinicApi.Application.Services.CustomerHandlig;
 using VetClinicApi.Core.Entities;
 using VetClinicApi.Database.Repositories;
-
 using Xunit;
 
 namespace VetClinicApi.Application.Tests.Services.CustomerHandling;
 
-public class Test
+public class CustomerService_Test
 {
     private readonly Mock<ICustomerRepository> _repository = new();
 

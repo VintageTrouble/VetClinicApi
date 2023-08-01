@@ -15,10 +15,16 @@ public abstract class AbstractRepository<TEntity> : IAbstractRepository<TEntity>
 
         return context.Set<TEntity>().ToList();
     }
+    public virtual IEnumerable<TEntity> GetAll(Func<TEntity, bool> filter)
+    {
+        using var context = _contextFactory.CreateDbContext();
+
+        return context.Set<TEntity>().Where(filter).ToList();
+    }
     public virtual TEntity? GetById(int id)
     {
         using var context = _contextFactory.CreateDbContext();
-        
+
         return context.Find<TEntity>(id);
     }
     public virtual TEntity Add(TEntity entity)
@@ -33,7 +39,7 @@ public abstract class AbstractRepository<TEntity> : IAbstractRepository<TEntity>
     public virtual TEntity Update(TEntity entity)
     {
         using var context = _contextFactory.CreateDbContext();
-        
+
         if (context.Find<TEntity>(entity.Id) is null)
             throw new ArgumentOutOfRangeException(nameof(entity.Id));
 
