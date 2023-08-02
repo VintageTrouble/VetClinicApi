@@ -4,6 +4,6 @@ namespace VetClinicApi.Database.Repositories;
 
 public interface ICustomerRepository : IAbstractRepository<Customer>
 {
-    Customer? GetByPassportNumber(string pasportNumber);
+    Task<Customer?> GetByPassportNumber(string pasportNumber);
 
 }

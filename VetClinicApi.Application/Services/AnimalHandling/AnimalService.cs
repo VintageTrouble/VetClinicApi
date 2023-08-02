@@ -15,7 +15,7 @@ public class AnimalService : IAnimalService
         _animalTypeRepository = animalTypeRepository;
     }
 
-    public Animal CreateAnimal(Animal? animal)
+    public async Task<Animal> CreateAnimal(Animal? animal)
     {
         if (animal == null)
             throw new ArgumentNullException(nameof(animal), "Animal can't be null.");
@@ -23,14 +23,14 @@ public class AnimalService : IAnimalService
         animal.RegistrationDate = DateTime.Today;
         animal.LastEditDate = DateTime.Today;
 
-        return _animalRepository.Add(animal);
+        return await _animalRepository.Add(animal);
     }
 
-    public void DeleteAnimal(int id)
+    public async Task DeleteAnimal(int id)
     {
         try
         {
-            _animalRepository.Delete(id);
+            await _animalRepository.Delete(id);
         }
         catch (ArgumentOutOfRangeException)
         {
@@ -38,19 +38,19 @@ public class AnimalService : IAnimalService
         }
     }
 
-    public Animal GetAnimal(int id)
+    public async Task<Animal> GetAnimal(int id)
     {
-        if (_animalRepository.GetById(id) is not Animal databaseAnimal)
+        if (await _animalRepository.GetById(id) is not Animal databaseAnimal)
             throw new AnimalNotFoundException(id);
         return databaseAnimal;
     }
 
-    public Animal UpdateAnimal(Animal? animal)
+    public async Task<Animal> UpdateAnimal(Animal? animal)
     {
         if (animal == null)
             throw new ArgumentNullException(nameof(animal), "Animal can't be null.");
 
-        if (_animalRepository.GetById(animal.Id) is not Animal databaseAnimal)
+        if (await _animalRepository.GetById(animal.Id) is not Animal databaseAnimal)
             throw new AnimalNotFoundException(animal.Id);
 
 
@@ -58,31 +58,31 @@ public class AnimalService : IAnimalService
         animal.RegistrationDate = databaseAnimal.RegistrationDate;
         try
         {
-            return _animalRepository.Update(animal);
+            return await _animalRepository.Update(animal);
         }
         catch (ArgumentOutOfRangeException)
         {
             throw new AnimalNotFoundException(animal.Id);
         }
     }
-    public IEnumerable<Animal> GetAnimalsByCustomer(int id)
+    public async Task<IEnumerable<Animal>> GetAnimalsByCustomer(int id)
     {
-        return _animalRepository.GetAll(x => x.CustomerId == id);
+        return await _animalRepository.GetAll(x => x.CustomerId == id);
     }
 
     //AnimalTypeMethods
-    public AnimalType CreateAnimalType(AnimalType? animalType)
+    public async Task<AnimalType> CreateAnimalType(AnimalType? animalType)
     {
         if (animalType == null)
             throw new ArgumentNullException(nameof(animalType), "AnimalType can't be null.");
-        return _animalTypeRepository.Add(animalType);
+        return await _animalTypeRepository.Add(animalType);
     }
 
-    public void DeleteAnimalType(int id)
+    public async Task DeleteAnimalType(int id)
     {
         try
         {
-            _animalTypeRepository.Delete(id);
+            await _animalTypeRepository.Delete(id);
         }
         catch (ArgumentOutOfRangeException)
         {
@@ -90,9 +90,9 @@ public class AnimalService : IAnimalService
         }
     }
 
-    public IEnumerable<AnimalType> GetAllAnimalTypes()
+    public async Task<IEnumerable<AnimalType>> GetAllAnimalTypes()
     {
-        return _animalTypeRepository.GetAll();
+        return await _animalTypeRepository.GetAll();
     }
 
 }

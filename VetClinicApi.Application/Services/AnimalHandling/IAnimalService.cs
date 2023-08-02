@@ -4,12 +4,12 @@ namespace VetClinicApi.Application.Services.AnimalHandling;
 
 public interface IAnimalService
 {
-    Animal CreateAnimal(Animal animal);
-    Animal UpdateAnimal(Animal animal);
-    Animal GetAnimal(int id);
-    void DeleteAnimal(int id);
-    IEnumerable<Animal> GetAnimalsByCustomer(int id);
-    AnimalType CreateAnimalType(AnimalType animalType);
-    void DeleteAnimalType(int id);
-    IEnumerable<AnimalType> GetAllAnimalTypes();
+    Task<Animal> CreateAnimal(Animal animal);
+    Task<Animal> UpdateAnimal(Animal animal);
+    Task<Animal> GetAnimal(int id);
+    Task DeleteAnimal(int id);
+    Task<IEnumerable<Animal>> GetAnimalsByCustomer(int id);
+    Task<AnimalType> CreateAnimalType(AnimalType animalType);
+    Task DeleteAnimalType(int id);
+    Task<IEnumerable<AnimalType>> GetAllAnimalTypes();
 }

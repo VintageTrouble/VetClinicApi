@@ -1,5 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
+using System.Linq.Expressions;
+
 using VetClinicApi.Core.Entities;
 
 namespace VetClinicApi.Database.Repositories;
@@ -9,53 +11,53 @@ public abstract class AbstractRepository<TEntity> : IAbstractRepository<TEntity>
     protected IDbContextFactory<VetClinicContext> _contextFactory;
     public AbstractRepository(IDbContextFactory<VetClinicContext> contextFactory) => _contextFactory = contextFactory;
 
-    public virtual IEnumerable<TEntity> GetAll()
+    public virtual async Task<IEnumerable<TEntity>> GetAll()
     {
         using var context = _contextFactory.CreateDbContext();
 
-        return context.Set<TEntity>().ToList();
+        return await context.Set<TEntity>().ToListAsync();
     }
-    public virtual IEnumerable<TEntity> GetAll(Func<TEntity, bool> filter)
+    public virtual async Task<IEnumerable<TEntity>> GetAll(Expression<Func<TEntity, bool>> filter)
     {
         using var context = _contextFactory.CreateDbContext();
 
-        return context.Set<TEntity>().Where(filter).ToList();
+        return await context.Set<TEntity>().Where(filter).ToListAsync();
     }
-    public virtual TEntity? GetById(int id)
+    public virtual async Task<TEntity?> GetById(int id)
     {
         using var context = _contextFactory.CreateDbContext();
 
-        return context.Find<TEntity>(id);
+        return await context.FindAsync<TEntity>(id);
     }
-    public virtual TEntity Add(TEntity entity)
+    public virtual async Task<TEntity> Add(TEntity entity)
     {
         using var context = _contextFactory.CreateDbContext();
-        var result = context.Set<TEntity>().Add(entity);
+        var result = await context.Set<TEntity>().AddAsync(entity);
 
-        context.SaveChanges();
+        await context.SaveChangesAsync();
 
         return result.Entity;
     }
-    public virtual TEntity Update(TEntity entity)
+    public virtual async Task<TEntity> Update(TEntity entity)
     {
         using var context = _contextFactory.CreateDbContext();
 
-        if (context.Find<TEntity>(entity.Id) is null)
+        if (await context.FindAsync<TEntity>(entity.Id) is null)
             throw new ArgumentOutOfRangeException(nameof(entity.Id));
 
         var result = context.Update(entity);
-        context.SaveChanges();
+        context.SaveChangesAsync();
 
         return result.Entity;
     }
-    public virtual void Delete(int id)
+    public virtual async Task Delete(int id)
     {
         using var context = _contextFactory.CreateDbContext();
 
-        if (context.Find<TEntity>(id) is not TEntity entity)
+        if (await context.FindAsync<TEntity>(id) is not TEntity entity)
             throw new ArgumentOutOfRangeException(nameof(id));
 
         context.Set<TEntity>().Remove(entity);
-        context.SaveChanges();
+        await context.SaveChangesAsync();
     }
 }
