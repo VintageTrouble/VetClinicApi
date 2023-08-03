@@ -123,7 +123,7 @@ public class CustomerService_Test
             LastEditDate = new DateTime(2015, 02, 12),
             LastVisitDate = null
         };
-        _repository.Setup(x => x.GetById(It.IsAny<int>())).ReturnsAsync((Customer?)null);
+        _repository.Setup(x => x.GetById(It.IsAny<int>())).ReturnsAsync(() => null);
         var customerService = new CustomerService(_repository.Object);
 
         await Assert.ThrowsAsync<CustomerNotFoundException>(async () => await customerService.UpdateCustomer(customer));
@@ -165,7 +165,7 @@ public class CustomerService_Test
     [Fact]
     public async Task Get_IdIsNotExist_Test()
     {
-        _repository.Setup(x => x.GetById(It.IsAny<int>())).ReturnsAsync((Customer?)null);
+        _repository.Setup(x => x.GetById(It.IsAny<int>())).ReturnsAsync(() => null);
         var customerService = new CustomerService(_repository.Object);
 
         await Assert.ThrowsAsync<CustomerNotFoundException>(async () => await customerService.GetCustomer(1));

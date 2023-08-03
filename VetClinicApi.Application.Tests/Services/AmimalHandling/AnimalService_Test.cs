@@ -105,7 +105,7 @@ public class AnimalService_Test
             LastEditDate = new DateTime(2015, 02, 12),
             RegistrationDate = new DateTime(1000, 01, 01),
         };
-        _animalRepository.Setup(x => x.GetById(It.IsAny<int>())).ReturnsAsync((Animal?)null);
+        _animalRepository.Setup(x => x.GetById(It.IsAny<int>())).ReturnsAsync(() => null);
         var animalService = new AnimalService(_animalRepository.Object, _animalTypeRepository.Object);
 
         await Assert.ThrowsAsync<AnimalNotFoundException>(async () => await animalService.UpdateAnimal(animal));
@@ -114,7 +114,7 @@ public class AnimalService_Test
     [Fact]
     public async Task Get_IdIsNotExist_Test()
     {
-        _animalRepository.Setup(x => x.GetById(It.IsAny<int>())).ReturnsAsync((Animal?)null);
+        _animalRepository.Setup(x => x.GetById(It.IsAny<int>())).ReturnsAsync(() => null);
         var animalService = new AnimalService(_animalRepository.Object, _animalTypeRepository.Object);
 
         await Assert.ThrowsAsync<AnimalNotFoundException>(async () => await animalService.GetAnimal(1));
@@ -123,7 +123,7 @@ public class AnimalService_Test
     [Fact]
     public async Task Delete_AnimalNotFound_Test()
     {
-        _animalRepository.Setup(x => x.Delete(It.IsAny<int>())).Throws<ArgumentOutOfRangeException>();
+        _animalRepository.Setup(x => x.Delete(It.IsAny<int>())).ThrowsAsync(new ArgumentOutOfRangeException());
         var animalService = new AnimalService(_animalRepository.Object, _animalTypeRepository.Object);
 
         await Assert.ThrowsAsync<AnimalNotFoundException>(async () => await animalService.DeleteAnimal(1));
@@ -141,7 +141,7 @@ public class AnimalService_Test
     [Fact]
     public async Task Delete_AnimalTypeNotFound_Test()
     {
-        _animalTypeRepository.Setup(x => x.Delete(It.IsAny<int>())).Throws<ArgumentOutOfRangeException>();
+        _animalTypeRepository.Setup(x => x.Delete(It.IsAny<int>())).ThrowsAsync(new ArgumentOutOfRangeException());
         var animalTypeService = new AnimalService(_animalRepository.Object, _animalTypeRepository.Object);
 
         await Assert.ThrowsAsync<AnimalTypeNotFoundException>(async () => await animalTypeService.DeleteAnimalType(1));
