@@ -46,7 +46,7 @@ public abstract class AbstractRepository<TEntity> : IAbstractRepository<TEntity>
             throw new ArgumentOutOfRangeException(nameof(entity.Id));
 
         var result = context.Update(entity);
-        context.SaveChangesAsync();
+        await context.SaveChangesAsync();
 
         return result.Entity;
     }

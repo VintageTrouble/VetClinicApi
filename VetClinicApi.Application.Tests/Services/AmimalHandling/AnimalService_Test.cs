@@ -41,7 +41,7 @@ public class AnimalService_Test
     {
         var animalService = new AnimalService(_animalRepository.Object, _animalTypeRepository.Object);
 
-        Assert.ThrowsAsync<ArgumentNullException>(() => animalService.CreateAnimal(null));
+        await Assert.ThrowsAsync<ArgumentNullException>(async() => await animalService.CreateAnimal(null));
     }
 
     [Fact]
@@ -85,10 +85,9 @@ public class AnimalService_Test
     [Fact]
     public async Task Update_AnimalIsNull_Test()
     {
-        _animalRepository.Setup(x => x.Update(It.IsAny<Animal>())).ReturnsAsync((Animal)null);
         var animalService = new AnimalService(_animalRepository.Object, _animalTypeRepository.Object);
 
-        Assert.ThrowsAsync<ArgumentNullException>(() => animalService.UpdateAnimal(null));
+        await Assert.ThrowsAsync<ArgumentNullException>(async () => await animalService.UpdateAnimal(null));
     }
 
     [Fact]
@@ -106,19 +105,19 @@ public class AnimalService_Test
             LastEditDate = new DateTime(2015, 02, 12),
             RegistrationDate = new DateTime(1000, 01, 01),
         };
-        _animalRepository.Setup(x => x.GetById(It.IsAny<int>())).ReturnsAsync((Animal)null);
+        _animalRepository.Setup(x => x.GetById(It.IsAny<int>())).ReturnsAsync((Animal?)null);
         var animalService = new AnimalService(_animalRepository.Object, _animalTypeRepository.Object);
 
-        Assert.ThrowsAsync<AnimalNotFoundException>(() => animalService.UpdateAnimal(animal));
+        await Assert.ThrowsAsync<AnimalNotFoundException>(async () => await animalService.UpdateAnimal(animal));
     }
 
     [Fact]
     public async Task Get_IdIsNotExist_Test()
     {
-        _animalRepository.Setup(x => x.GetById(It.IsAny<int>())).ReturnsAsync((Animal)null);
+        _animalRepository.Setup(x => x.GetById(It.IsAny<int>())).ReturnsAsync((Animal?)null);
         var animalService = new AnimalService(_animalRepository.Object, _animalTypeRepository.Object);
 
-        Assert.ThrowsAsync<AnimalNotFoundException>(() => animalService.GetAnimal(1));
+        await Assert.ThrowsAsync<AnimalNotFoundException>(async () => await animalService.GetAnimal(1));
     }
 
     [Fact]
@@ -127,7 +126,7 @@ public class AnimalService_Test
         _animalRepository.Setup(x => x.Delete(It.IsAny<int>())).Throws<ArgumentOutOfRangeException>();
         var animalService = new AnimalService(_animalRepository.Object, _animalTypeRepository.Object);
 
-        Assert.ThrowsAsync<AnimalNotFoundException>(() => animalService.DeleteAnimal(1));
+        await Assert.ThrowsAsync<AnimalNotFoundException>(async () => await animalService.DeleteAnimal(1));
     }
 
     //AnimalType Tets
@@ -136,7 +135,7 @@ public class AnimalService_Test
     {
         var animalTypeService = new AnimalService(_animalRepository.Object, _animalTypeRepository.Object);
 
-        Assert.ThrowsAsync<ArgumentNullException>(() => animalTypeService.CreateAnimalType(null));
+        await Assert.ThrowsAsync<ArgumentNullException>(async () => await animalTypeService.CreateAnimalType(null));
     }
 
     [Fact]
@@ -145,6 +144,6 @@ public class AnimalService_Test
         _animalTypeRepository.Setup(x => x.Delete(It.IsAny<int>())).Throws<ArgumentOutOfRangeException>();
         var animalTypeService = new AnimalService(_animalRepository.Object, _animalTypeRepository.Object);
 
-        Assert.ThrowsAsync<AnimalTypeNotFoundException>(() => animalTypeService.DeleteAnimalType(1));
+        await Assert.ThrowsAsync<AnimalTypeNotFoundException>(async () => await animalTypeService.DeleteAnimalType(1));
     }
 }
