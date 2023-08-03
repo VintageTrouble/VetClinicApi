@@ -1,13 +1,15 @@
-﻿using VetClinicApi.Core.Entities;
+﻿using System.Linq.Expressions;
+
+using VetClinicApi.Core.Entities;
 
 namespace VetClinicApi.Database.Repositories;
 
 public interface IAbstractRepository<TEntity> where TEntity : class, IEntity
 {
-    TEntity Add(TEntity entity);
-    void Delete(int id);
-    IEnumerable<TEntity> GetAll();
-    IEnumerable<TEntity> GetAll(Func<TEntity, bool> filter);
-    TEntity? GetById(int id);
-    TEntity Update(TEntity entity);
+    Task<TEntity> Add(TEntity entity);
+    Task Delete(int id);
+    Task<IEnumerable<TEntity>> GetAll();
+    Task<IEnumerable<TEntity>> GetAll(Expression<Func<TEntity, bool>> filter);
+    Task<TEntity?> GetById(int id);
+    Task<TEntity> Update(TEntity entity);
 }
