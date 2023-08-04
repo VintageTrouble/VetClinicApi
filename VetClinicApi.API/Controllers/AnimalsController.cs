@@ -78,7 +78,7 @@ public class AnimalsController : BaseController
     }
 
     //AnimalType endpoints
-    [HttpGet("type/{id}")]
+    [HttpGet("type")]
     [ProducesResponseType(typeof(IEnumerable<AnimalTypeResponse>), (int)HttpStatusCode.OK)]
     public async Task<IActionResult> GetAllAnimalTypes()
     {
