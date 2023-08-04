@@ -39,7 +39,7 @@ public class CustomersController : BaseController
     {
         var customer = _mapper.Map<Customer>(customerRequest);
         var newCustomer = await _customerService.CreateCustomer(customer);
-        var response = _mapper.Map<CustomerResponse>(customer);
+        var response = _mapper.Map<CustomerResponse>(newCustomer);
 
         return StatusCode((int)HttpStatusCode.Created, response);
     }
@@ -51,7 +51,7 @@ public class CustomersController : BaseController
     {
         var customer = _mapper.Map<Customer>(customerRequest);
         var newCustomer = await _customerService.UpdateCustomer(customer);
-        var response = _mapper.Map<CustomerResponse>(customer);
+        var response = _mapper.Map<CustomerResponse>(newCustomer);
 
         return StatusCode((int)HttpStatusCode.OK, response);
     }
