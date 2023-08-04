@@ -18,7 +18,7 @@ public class AnimalMappingConfig_Test
     }
 
     [Fact]
-    public void Map_AnimalToCAnimalResponse_Test()
+    public void Map_AnimalToAnimalResponse_Test()
     {
         var animal = new Animal
         {

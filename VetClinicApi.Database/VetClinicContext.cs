@@ -70,6 +70,10 @@ public class VetClinicContext : DbContext
            .WithMany()
            .HasForeignKey(x => x.AnimalTypeId);
 
+        modelBuilder.Entity<AnimalType>()
+            .ToTable("T_AnimalType")
+            .HasKey(x => x.Id);
+
         base.OnModelCreating(modelBuilder);
     }
 }
