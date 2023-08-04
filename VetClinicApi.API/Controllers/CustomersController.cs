@@ -32,7 +32,7 @@ public class CustomersController : BaseController
         return StatusCode((int)HttpStatusCode.OK, response);
     }
 
-    [HttpPost("create")]
+    [HttpPut("create")]
     [ProducesResponseType(typeof(CustomerResponse), (int)HttpStatusCode.Created)]
     [ProducesResponseType(typeof(ProblemDetails), (int)HttpStatusCode.Conflict)]
     public async Task<IActionResult> CreateCustomer(CreateCustomerRequest customerRequest)

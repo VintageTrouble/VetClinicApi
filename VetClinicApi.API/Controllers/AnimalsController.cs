@@ -43,7 +43,7 @@ public class AnimalsController : BaseController
         return StatusCode((int)HttpStatusCode.OK, response);
     }
 
-    [HttpPost("create")]
+    [HttpPut("create")]
     [ProducesResponseType(typeof(AnimalResponse), (int)HttpStatusCode.Created)]
     [ProducesResponseType(typeof(ProblemDetails), (int)HttpStatusCode.Conflict)]
     public async Task<IActionResult> CreateAnimal(CreateAnimalRequest animalRequest)
@@ -67,7 +67,7 @@ public class AnimalsController : BaseController
         return StatusCode((int)HttpStatusCode.OK, response);
     }
 
-    [HttpPost("delete/{id}")]
+    [HttpDelete("delete/{id}")]
     [ProducesResponseType((int)HttpStatusCode.OK)]
     [ProducesResponseType(typeof(ProblemDetails), (int)HttpStatusCode.Conflict)]
     public async Task<IActionResult> DeleteAnimal(int id)
@@ -78,7 +78,7 @@ public class AnimalsController : BaseController
     }
 
     //AnimalType endpoints
-    [HttpGet("type")]
+    [HttpGet("type/{id}")]
     [ProducesResponseType(typeof(IEnumerable<AnimalTypeResponse>), (int)HttpStatusCode.OK)]
     public async Task<IActionResult> GetAllAnimalTypes()
     {
@@ -88,7 +88,7 @@ public class AnimalsController : BaseController
         return StatusCode((int) HttpStatusCode.OK);
     }
 
-    [HttpPost("type/create")]
+    [HttpPut("type/create")]
     [ProducesResponseType(typeof(AnimalTypeResponse), (int)HttpStatusCode.Created)]
     public async Task<IActionResult> CreateAnimalType(string name)
     {
@@ -102,7 +102,7 @@ public class AnimalsController : BaseController
         return StatusCode((int)HttpStatusCode.Created, response);
     }
 
-    [HttpGet("types/delete/{id}")]
+    [HttpDelete("type/delete/{id}")]
     [ProducesResponseType((int)HttpStatusCode.OK)]
     public async Task<IActionResult> DeleteAnimalType(int id)
     {
