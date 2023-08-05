@@ -8,17 +8,25 @@ public class AnimalService : IAnimalService
 {
     private readonly IAnimalRepository _animalRepository;
     private readonly IAbstractRepository<AnimalType> _animalTypeRepository;
+    private readonly ICustomerRepository _customerRepository;
 
-    public AnimalService(IAnimalRepository animalRepository, IAbstractRepository<AnimalType> animalTypeRepository)
+    public AnimalService(IAnimalRepository animalRepository, IAbstractRepository<AnimalType> animalTypeRepository, ICustomerRepository customerRepository)
     {
         _animalRepository = animalRepository;
         _animalTypeRepository = animalTypeRepository;
+        _customerRepository = customerRepository;
     }
 
     public async Task<Animal> CreateAnimal(Animal? animal)
     {
         if (animal == null)
             throw new ArgumentNullException(nameof(animal), "Animal can't be null.");
+
+        if (await _customerRepository.GetById(animal.CustomerId) is null)
+            throw new EntityNotFoundException(animal.CustomerId, nameof(Customer));
+        
+        if (await _animalTypeRepository.GetById(animal.AnimalTypeId) is null)
+            throw new EntityNotFoundException(animal.AnimalTypeId, nameof(AnimalType));
 
         animal.RegistrationDate = DateTime.Today;
         animal.LastEditDate = DateTime.Today;

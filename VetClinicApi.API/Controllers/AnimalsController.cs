@@ -83,9 +83,9 @@ public class AnimalsController : BaseController
     public async Task<IActionResult> GetAllAnimalTypes()
     {
         var animalTypes = await _animalService.GetAllAnimalTypes();
-        var response = animalTypes.Select(x => _mapper.Map<AnimalType>(x));
+        var response = animalTypes.Select(x => _mapper.Map<AnimalTypeResponse>(x));
 
-        return StatusCode((int) HttpStatusCode.OK);
+        return StatusCode((int) HttpStatusCode.OK, response);
     }
 
     [HttpPut("type/create")]

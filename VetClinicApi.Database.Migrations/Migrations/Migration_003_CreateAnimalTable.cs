@@ -14,7 +14,7 @@ public class Migration_003_CreateAnimalTable : Migration
             .WithColumn("Name").AsString().NotNullable()
             .WithColumn("Breed").AsString().NotNullable()
             .WithColumn("BirthDate").AsDate().NotNullable()
-            .WithColumn("IsVaccinate").AsBoolean().NotNullable()
+            .WithColumn("IsVaccinated").AsBoolean().NotNullable()
             .WithColumn("RegistrationDate").AsDateTime().NotNullable()
             .WithColumn("LastEditDate").AsDateTime().NotNullable();
 
@@ -25,8 +25,8 @@ public class Migration_003_CreateAnimalTable : Migration
     }
     public override void Down()
     {
-        Delete.ForeignKey("FK_AnimalAnimalType");
-        Delete.ForeignKey("FK_AnimalCustomer");
+        Delete.ForeignKey("FK_AnimalAnimalType").OnTable("T_Animal");
+        Delete.ForeignKey("FK_AnimalCustomer").OnTable("T_Animal");
         Delete.Table("T_Animal");
     }
 }
