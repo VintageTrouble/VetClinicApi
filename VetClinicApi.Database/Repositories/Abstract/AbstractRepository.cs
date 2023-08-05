@@ -33,14 +33,8 @@ public abstract class AbstractRepository<TEntity> : IAbstractRepository<TEntity>
     {
         using var context = _contextFactory.CreateDbContext();
         var result = await context.Set<TEntity>().AddAsync(entity);
-        try
-        {
-            await context.SaveChangesAsync();
-        }
 
-        catch (Exception ex) 
-        { 
-        }
+        await context.SaveChangesAsync();
 
         return result.Entity;
     }
