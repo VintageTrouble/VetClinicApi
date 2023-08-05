@@ -8,7 +8,7 @@ using Xunit;
 
 namespace VetClinicApi.API.Tests.Common.Validation;
 
-public class CreateCustomerRequsetValidator_Test
+public class CreateCustomerRequestValidator_Test
 {
     private readonly IValidator<CreateCustomerRequest> _validator;
     private static IEnumerable<object[]> InvalidCreateCustomerRequests()
@@ -103,7 +103,7 @@ public class CreateCustomerRequsetValidator_Test
         };
     }
 
-    public CreateCustomerRequsetValidator_Test()
+    public CreateCustomerRequestValidator_Test()
     {
         _validator = new CreateCustomerRequsetValidator();
     }

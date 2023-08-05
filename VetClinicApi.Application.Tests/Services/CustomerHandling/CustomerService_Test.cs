@@ -4,18 +4,17 @@ using VetClinicApi.Application.Common.Exceptions;
 using VetClinicApi.Application.Services.CustomerHandlig;
 using VetClinicApi.Core.Entities;
 using VetClinicApi.Database.Repositories;
-
 using Xunit;
 
 namespace VetClinicApi.Application.Tests.Services.CustomerHandling;
 
-public class Test
+public class CustomerService_Test
 {
     private readonly Mock<ICustomerRepository> _repository = new();
 
 
     [Fact]
-    public void Create_ValidPerson_Test()
+    public async Task Create_ValidPerson_Test()
     {
         var customer = new Customer()
         {
@@ -26,10 +25,10 @@ public class Test
             PassportNumber = "3453-391345",
             PhoneNumber = "8 (911) 090-25-33"
         };
-        _repository.Setup(x => x.Add(It.IsAny<Customer>())).Returns(customer);
+        _repository.Setup(x => x.Add(It.IsAny<Customer>())).ReturnsAsync(customer);
 
         var customerService = new CustomerService(_repository.Object);
-        var result = customerService.CreateCustomer(customer);
+        var result = await customerService.CreateCustomer(customer);
 
         Assert.Equal(DateTime.Today, result.RegistrationDate);
         Assert.Equal(DateTime.Today, result.LastEditDate);
@@ -37,15 +36,15 @@ public class Test
     }
 
     [Fact]
-    public void Create_CustomerIsNull_Test()
+    public async Task Create_CustomerIsNull_Test()
     {
         var customerService = new CustomerService(_repository.Object);
 
-        Assert.Throws<ArgumentNullException>(() => customerService.CreateCustomer(null));
+        await Assert.ThrowsAsync<ArgumentNullException>(async () => await customerService.CreateCustomer(null));
     }
 
     [Fact]
-    public void Create_AddExcistingPassportNumber_Test()
+    public async Task Create_AddExcistingPassportNumber_Test()
     {
         var customer = new Customer()
         {
@@ -57,14 +56,14 @@ public class Test
             PhoneNumber = "8 (911) 090-25-33"
         };
 
-        _repository.Setup(x => x.GetByPassportNumber(It.IsAny<string>())).Returns(customer);
+        _repository.Setup(x => x.GetByPassportNumber(It.IsAny<string>())).ReturnsAsync(customer);
         var customerService = new CustomerService(_repository.Object);
 
-        Assert.Throws<PassportNumberConflictExceprion>(() =>  customerService.CreateCustomer(customer));
+        await Assert.ThrowsAsync<PassportNumberConflictExceprion>(async () => await customerService.CreateCustomer(customer));
     }
 
     [Fact]
-    public void Update_CustomerSuccessfullyEdited_Test()
+    public async Task Update_CustomerSuccessfullyEdited_Test()
     {
         var customer = new Customer()
         {
@@ -91,27 +90,26 @@ public class Test
             LastVisitDate = null
         };
 
-        _repository.Setup(x => x.Update(It.IsAny<Customer>())).Returns(customer);
-        _repository.Setup(x =>x.GetById(It.IsAny<int>())).Returns(databaseCustomer);
+        _repository.Setup(x => x.Update(It.IsAny<Customer>())).ReturnsAsync(customer);
+        _repository.Setup(x =>x.GetById(It.IsAny<int>())).ReturnsAsync(databaseCustomer);
         var customerService = new CustomerService(_repository.Object);
 
-        var result = customerService.UpdateCustomer(customer);
+        var result = await customerService.UpdateCustomer(customer);
 
         Assert.Equal(DateTime.Today, result.LastEditDate);
         Assert.Equal(databaseCustomer.RegistrationDate, result.RegistrationDate);
     }
 
     [Fact]
-    public void Update_CustomerIsNull_Test()
+    public async Task Update_CustomerIsNull_Test()
     {
-        _repository.Setup(x => x.Update(It.IsAny<Customer>())).Returns<Customer>(null);
         var customerService = new CustomerService(_repository.Object);
 
-        Assert.Throws<ArgumentNullException>(() => customerService.UpdateCustomer(null));
+        await Assert.ThrowsAsync<ArgumentNullException>(async () => await customerService.UpdateCustomer(null));
     }
 
     [Fact]
-    public void Update_CustomerNotFound_Test()
+    public async Task Update_CustomerNotFound_Test()
     {
         var customer = new Customer()
         {
@@ -125,14 +123,14 @@ public class Test
             LastEditDate = new DateTime(2015, 02, 12),
             LastVisitDate = null
         };
-        _repository.Setup(x => x.GetById(It.IsAny<int>())).Returns<Customer>(null);
+        _repository.Setup(x => x.GetById(It.IsAny<int>())).ReturnsAsync(() => null);
         var customerService = new CustomerService(_repository.Object);
 
-        Assert.Throws<CustomerNotFoundException>(() => customerService.UpdateCustomer(customer));
+        await Assert.ThrowsAsync<CustomerNotFoundException>(async () => await customerService.UpdateCustomer(customer));
     }
 
     [Fact]
-    public void Update_LastVisitDateTurnsToNull_Test()
+    public async Task Update_LastVisitDateTurnsToNull_Test()
     {
         var customer = new Customer()
         {
@@ -158,18 +156,18 @@ public class Test
             LastEditDate = new DateTime(2015, 02, 12),
             LastVisitDate = new DateTime(2015, 02, 12)
         };
-        _repository.Setup(x => x.GetById(It.IsAny<int>())).Returns(databaseCustomer);
+        _repository.Setup(x => x.GetById(It.IsAny<int>())).ReturnsAsync(databaseCustomer);
         var customerService = new CustomerService(_repository.Object);
 
-        Assert.Throws<ValueTurnsToNullException>(() => customerService.UpdateCustomer(customer));
+        await Assert.ThrowsAsync<ValueTurnsToNullException>(async () => await customerService.UpdateCustomer(customer));
     }
 
     [Fact]
-    public void Get_IdIsNotExist_Test()
+    public async Task Get_IdIsNotExist_Test()
     {
-        _repository.Setup(x => x.GetById(It.IsAny<int>())).Returns<Customer>(null);
+        _repository.Setup(x => x.GetById(It.IsAny<int>())).ReturnsAsync(() => null);
         var customerService = new CustomerService(_repository.Object);
 
-        Assert.Throws<CustomerNotFoundException>(() => customerService.GetCustomer(1));
+        await Assert.ThrowsAsync<CustomerNotFoundException>(async () => await customerService.GetCustomer(1));
     }
 }
