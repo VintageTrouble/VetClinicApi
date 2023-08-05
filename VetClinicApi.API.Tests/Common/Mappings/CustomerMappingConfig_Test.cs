@@ -55,12 +55,15 @@ public class CustomerMappingConfig_Test
 
         var result = _mapper.Map<Customer>(customer);
 
-        Assert.Equal(0, result.Id);
+        Assert.Equal(default, result.Id);
         Assert.Equal(customer.FirstName, result.FirstName);
         Assert.Equal(customer.LastName, result.LastName);
         Assert.Equal(customer.BirthDate, result.BirthDate);
         Assert.Equal(customer.PassportNumber, result.PassportNumber);
         Assert.Equal(customer.PhoneNumber, result.PhoneNumber);
+        Assert.Equal(default, result.RegistrationDate);
+        Assert.Equal(default, result.LastEditDate);
+        Assert.Null(result.LastVisitDate);
     }
 
     [Fact]

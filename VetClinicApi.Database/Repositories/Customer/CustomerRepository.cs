@@ -9,10 +9,10 @@ public class CustomerRepository : AbstractRepository<Customer>, ICustomerReposit
     public CustomerRepository(IDbContextFactory<VetClinicContext> contextFactory) : base(contextFactory)
     { }
 
-    public Task<Customer?> GetByPassportNumber(string pasportNumber)
+    public async Task<Customer?> GetByPassportNumber(string pasportNumber)
     {
         using var context = _contextFactory.CreateDbContext();
 
-        return context.Customers.FirstOrDefaultAsync(x => x.PassportNumber == pasportNumber);
+        return await context.Customers.FirstOrDefaultAsync(x => x.PassportNumber == pasportNumber);
     }
 }

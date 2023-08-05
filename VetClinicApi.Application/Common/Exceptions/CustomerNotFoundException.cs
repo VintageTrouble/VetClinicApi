@@ -1,12 +1,8 @@
-﻿using System.Net;
+﻿namespace VetClinicApi.Application.Common.Exceptions;
 
-using VetClinicApi.Application.Common.Exceptions.Abstract;
-
-namespace VetClinicApi.Application.Common.Exceptions;
-
-public class CustomerNotFoundException : BaseApplicationException
+public class CustomerNotFoundException : EntityNotFoundException
 {
-    public CustomerNotFoundException(int id) : base(HttpStatusCode.BadRequest, $"Customer with id = {id} not found.")
+    public CustomerNotFoundException(int id) : base(id, "Customer")
     {
     }
 }

@@ -8,11 +8,11 @@ using Xunit;
 
 namespace VetClinicApi.API.Tests.Common.Validation;
 
-public class UpdateCustomerRequsetValidator_Test
+public class UpdateCustomerRequestValidator_Test
 {
     private readonly IValidator<UpdateCustomerRequest> _validator;
 
-    public UpdateCustomerRequsetValidator_Test()
+    public UpdateCustomerRequestValidator_Test()
     {
         _validator = new UpdateCustomerRequestValidator();
     }

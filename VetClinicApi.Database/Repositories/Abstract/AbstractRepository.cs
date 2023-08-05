@@ -42,8 +42,10 @@ public abstract class AbstractRepository<TEntity> : IAbstractRepository<TEntity>
     {
         using var context = _contextFactory.CreateDbContext();
 
-        if (await context.FindAsync<TEntity>(entity.Id) is null)
+        if (await context.FindAsync<TEntity>(entity.Id) is not TEntity oldEntity)
             throw new ArgumentOutOfRangeException(nameof(entity.Id));
+
+        context.Entry(oldEntity).State = EntityState.Detached;
 
         var result = context.Update(entity);
         await context.SaveChangesAsync();
