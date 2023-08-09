@@ -130,6 +130,19 @@ public class CustomerService_Test
     }
 
     [Fact]
+    public async Task Update_RepositoryUpdateThrowsArgumentOutOfRangeException_CustomerNotFoundExceptionResult_Test()
+    {
+        var customer = new Customer() { Id = 1 };
+
+        _repository.Setup(x => x.Update(It.IsAny<Customer>())).ThrowsAsync(new ArgumentOutOfRangeException());
+        var customerService = new CustomerService(_repository.Object);
+
+        var exception = await Assert.ThrowsAsync<CustomerNotFoundException>(async () => await customerService.UpdateCustomer(customer));
+
+        Assert.Equal("Customer with id = 1 not found.", exception.Message);
+    }
+
+    [Fact]
     public async Task Update_LastVisitDateTurnsToNull_Test()
     {
         var customer = new Customer()

@@ -176,6 +176,19 @@ public class AnimalService_Test
     }
 
     [Fact]
+    public async Task Update_RepositoryUpdateThrowsArgumentOutOfRangeException_AnimalNotFoundExceptionResult_Test()
+    {
+        var animal = new Animal() { Id = 1 };
+
+        _animalRepository.Setup(x => x.Update(It.IsAny<Animal>())).ThrowsAsync(new ArgumentOutOfRangeException());
+        var animalService = new AnimalService(_animalRepository.Object, _animalTypeRepository.Object, _customerRepository.Object);
+
+        var exception = await Assert.ThrowsAsync<AnimalNotFoundException>(async () => await animalService.UpdateAnimal(animal));
+
+        Assert.Equal("Animal with id = 1 not found.", exception.Message);
+    }
+
+    [Fact]
     public async Task Get_IdIsNotExist_Test()
     {
         _animalRepository.Setup(x => x.GetById(It.IsAny<int>())).ReturnsAsync(() => null);
