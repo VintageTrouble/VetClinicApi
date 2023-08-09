@@ -2,7 +2,7 @@
 
 namespace VetClinicApi.Database.Migrations.Migrations.Abstract;
 
-public class EnumMigration<TEnum> : Migration
+public abstract class EnumMigration<TEnum> : Migration
     where TEnum : Enum
 {
     public override void Up()
