@@ -1,15 +1,8 @@
 ﻿using FluentMigrator;
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-using VetClinicApi.Core.Enums;
-
 namespace VetClinicApi.Database.Migrations.Migrations;
 
+[Migration(MigrationVersioning.CreateVisitTable)]
 public class Migration_008_CreateVisitTable : Migration
 {
 
@@ -22,9 +15,13 @@ public class Migration_008_CreateVisitTable : Migration
             .WithColumn("VisitDate").AsDateTime().NotNullable();
 
         Create.ForeignKey("FK_VisitCustomer")
-            .FromTable("T_Visit").ForeignColumn("CustomerId").ToTable("T_Customer").PrimaryColumn("Id");
+            .FromTable("T_Visit").ForeignColumn("CustomerId")
+            .ToTable("T_Customer").PrimaryColumn("Id");
+
         Create.ForeignKey("FK_VisitVisitStatus")
-            .FromTable("T_Visit").ForeignColumn("VisitStatus").ToTable("T_VisitStatus").PrimaryColumn("Id");
+            .FromTable("T_Visit").ForeignColumn("VisitStatus")
+            .ToTable("T_VisitStatus").PrimaryColumn("Id")
+            .OnDelete(System.Data.Rule.None);
     }
     public override void Down()
     {
