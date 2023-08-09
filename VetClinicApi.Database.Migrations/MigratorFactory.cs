@@ -15,7 +15,8 @@ public static class MigratorFactory
             .ConfigureRunner(rb => rb
                 .AddPostgres()
                 .WithGlobalConnectionString(connectionString)
-                .ScanIn(typeof(IAssemblyMarker).Assembly).For.Migrations())
+                .ScanIn(typeof(IAssemblyMarker).Assembly)
+                .For.Migrations())
             .AddLogging(lb => lb.AddFluentMigratorConsole())
             .BuildServiceProvider(false);
 

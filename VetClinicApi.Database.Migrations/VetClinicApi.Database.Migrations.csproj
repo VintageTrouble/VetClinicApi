@@ -12,4 +12,8 @@
     <PackageReference Include="FluentMigrator.Runner.Postgres" Version="3.3.2" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\VetClinicApi.Core\VetClinicApi.Core.csproj" />
+  </ItemGroup>
+
 </Project>

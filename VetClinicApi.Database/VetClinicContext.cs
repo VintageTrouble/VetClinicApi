@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
 using VetClinicApi.Core.Entities;
+using VetClinicApi.Core.Enums;
 using VetClinicApi.Core.Extensions;
 
 namespace VetClinicApi.Database;
@@ -73,6 +74,30 @@ public class VetClinicContext : DbContext
         modelBuilder.Entity<AnimalType>()
             .ToTable("T_AnimalType")
             .HasKey(x => x.Id);
+
+        modelBuilder.Entity<Room>()
+            .ToTable("T_Room")
+            .HasKey(x => x.Id);
+
+        modelBuilder.Entity<PriceList>()
+            .ToTable("T_PriceList")
+            .HasKey(x => x.Id);
+
+        modelBuilder.Entity<Visit>()
+            .ToTable("T_VisitTable")
+            .HasKey(x => x.Id);
+
+        modelBuilder.Entity<Visit>()
+            .HasOne<Customer>()
+            .WithMany()
+            .HasForeignKey(x => x.CustomerId);
+
+        modelBuilder.Entity<Visit>()
+            .Property(x => x.VisitDate)
+                .HasConversion(
+                    src => src.ToUnspecifiedKind(),
+                    dst => dst.ToUnspecifiedKind());
+
 
         base.OnModelCreating(modelBuilder);
     }

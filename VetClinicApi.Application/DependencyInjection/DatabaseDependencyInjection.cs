@@ -17,6 +17,9 @@ public static class DatabaseDependencyInjection
         services.AddScoped<ICustomerRepository, CustomerRepository>();
         services.AddScoped<IAnimalRepository, AnimalRepository>();
         services.AddScoped<IAbstractRepository<AnimalType>, AnimalTypeRepository>();
+        services.AddScoped<IRoomRepository, RoomRepository>();
+        services.AddScoped<IVisitRepository, VisitRepository>();
+        services.AddScoped<IPriceListRepository, PriceListRepository>();
 
         return services;
     }
