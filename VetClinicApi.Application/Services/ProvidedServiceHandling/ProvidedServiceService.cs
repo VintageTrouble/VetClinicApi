@@ -13,7 +13,7 @@ namespace VetClinicApi.Application.Services.ProvidedServiceHandling
             _providedServiceRepository = providedServiceRepository;
         }
 
-        public async Task<ProvidedService> CreateProvidedService(ProvidedService providedService)
+        public async Task<ProvidedService> CreateProvidedService(ProvidedService? providedService)
         {
             if (providedService == null)
                 throw new ArgumentNullException(nameof(providedService), "ProvidedService can't be null.");
@@ -29,7 +29,7 @@ namespace VetClinicApi.Application.Services.ProvidedServiceHandling
             }
             catch (ArgumentOutOfRangeException)
             {
-                throw new EntityNotFoundException(id, "providedService");
+                throw new EntityNotFoundException(id, "ProvidedService");
             }
         }
 
@@ -38,7 +38,7 @@ namespace VetClinicApi.Application.Services.ProvidedServiceHandling
             return await _providedServiceRepository.GetAll();
         }
 
-        public async Task<ProvidedService> UpdateProvidedService(ProvidedService providedService)
+        public async Task<ProvidedService> UpdateProvidedService(ProvidedService? providedService)
         {
             if (providedService == null)
                 throw new ArgumentNullException(nameof(providedService), "ProvidedService can't be null.");
@@ -49,7 +49,7 @@ namespace VetClinicApi.Application.Services.ProvidedServiceHandling
             }
             catch (ArgumentOutOfRangeException)
             {
-                throw new EntityNotFoundException(providedService.Id, "providedService");
+                throw new EntityNotFoundException(providedService.Id, "ProvidedService");
             }
 
         }

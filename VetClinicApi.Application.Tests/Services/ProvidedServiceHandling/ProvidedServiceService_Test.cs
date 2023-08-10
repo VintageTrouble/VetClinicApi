@@ -48,6 +48,6 @@ public class ProvidedServiceService_Test
 
         var exception = await Assert.ThrowsAsync<EntityNotFoundException>(async () => await providedServiceService.UpdateProvidedService(providedService));
 
-        Assert.Equal("providedService with id = 1 not found.", exception.Message);
+        Assert.Equal("ProvidedService with id = 1 not found.", exception.Message);
     }
 }
