@@ -1,53 +1,53 @@
 ﻿using Moq;
 
 using VetClinicApi.Application.Common.Exceptions;
-using VetClinicApi.Application.Services.PriceListHandling;
+using VetClinicApi.Application.Services.ProvidedServiceHandling;
 using VetClinicApi.Core.Entities;
 using VetClinicApi.Database.Repositories;
 
 using Xunit;
 
-namespace VetClinicApi.Application.Tests.Services.PriceListHandling;
+namespace VetClinicApi.Application.Tests.Services.ProvidedServiceHandling;
 
-public class PriceListService_Test
+public class ProvidedServiceService_Test
 {
-    private readonly Mock<IPriceListRepository> _priceListRepository = new();
+    private readonly Mock<IProvidedServiceRepository> _providedServiceRepository = new();
 
     [Fact]
-    public async Task Create_PriceListIsNull_Test()
+    public async Task Create_ProvidedServiceIsNull_Test()
     {
-        var priceListService = new PriceListService(_priceListRepository.Object);
+        var providedServiceService = new ProvidedServiceService(_providedServiceRepository.Object);
 
-        await Assert.ThrowsAsync<ArgumentNullException>(async () => await priceListService.CreatePriceList(null));
+        await Assert.ThrowsAsync<ArgumentNullException>(async () => await providedServiceService.CreateProvidedService(null));
     }
 
     [Fact]
-    public async Task Delete_PriceListNotFound_Test()
+    public async Task Delete_ProvidedServiceNotFound_Test()
     {
-        _priceListRepository.Setup(x => x.Delete(It.IsAny<int>())).ThrowsAsync(new ArgumentOutOfRangeException());
-        var priceListService = new PriceListService(_priceListRepository.Object);
+        _providedServiceRepository.Setup(x => x.Delete(It.IsAny<int>())).ThrowsAsync(new ArgumentOutOfRangeException());
+        var providedServiceService = new ProvidedServiceService(_providedServiceRepository.Object);
 
-        await Assert.ThrowsAsync<EntityNotFoundException>(async () => await priceListService.DeletePriceList(1));
+        await Assert.ThrowsAsync<EntityNotFoundException>(async () => await providedServiceService.DeleteProvidedService(1));
     }
 
     [Fact]
-    public async Task Update_PriceListIsNull_Test()
+    public async Task Update_ProvidedServiceIsNull_Test()
     {
-        var priceListService = new PriceListService(_priceListRepository.Object);
+        var providedServiceService = new ProvidedServiceService(_providedServiceRepository.Object);
 
-        await Assert.ThrowsAsync<ArgumentNullException>(async () => await priceListService.UpdatePriceList(null));
+        await Assert.ThrowsAsync<ArgumentNullException>(async () => await providedServiceService.UpdateProvidedService(null));
     }
 
     [Fact]
-    public async Task Update_RepositoryUpdateThrowsArgumentOutOfRangeException_PriceListNotFoundExceptionResult_Test()
+    public async Task Update_RepositoryUpdateThrowsArgumentOutOfRangeException_ProvidedServiceNotFoundExceptionResult_Test()
     {
-        var priceList = new PriceList() { Id = 1 };
+        var providedService = new ProvidedService() { Id = 1 };
 
-        _priceListRepository.Setup(x => x.Update(It.IsAny<PriceList>())).ThrowsAsync(new ArgumentOutOfRangeException());
-        var priceListService = new PriceListService(_priceListRepository.Object);
+        _providedServiceRepository.Setup(x => x.Update(It.IsAny<ProvidedService>())).ThrowsAsync(new ArgumentOutOfRangeException());
+        var providedServiceService = new ProvidedServiceService(_providedServiceRepository.Object);
 
-        var exception = await Assert.ThrowsAsync<EntityNotFoundException>(async () => await priceListService.UpdatePriceList(priceList));
+        var exception = await Assert.ThrowsAsync<EntityNotFoundException>(async () => await providedServiceService.UpdateProvidedService(providedService));
 
-        Assert.Equal("priceList with id = 1 not found.", exception.Message);
+        Assert.Equal("providedService with id = 1 not found.", exception.Message);
     }
 }

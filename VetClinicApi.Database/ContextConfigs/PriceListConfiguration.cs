@@ -6,12 +6,12 @@ using VetClinicApi.Database.ContextConfigs.Abstract;
 
 namespace VetClinicApi.Database.ContextConfigs;
 
-public class PriceListConfiguration : BaseConfiguration<PriceList>
+public class ProvidedServiceConfiguration : BaseConfiguration<ProvidedService>
 {
-    public override void Configure(EntityTypeBuilder<PriceList> builder)
+    public override void Configure(EntityTypeBuilder<ProvidedService> builder)
     {
         builder
-            .ToTable("T_PriceList")
+            .ToTable("T_ProvidedService")
             .HasKey(x => x.Id);
 
         base.Configure(builder);
