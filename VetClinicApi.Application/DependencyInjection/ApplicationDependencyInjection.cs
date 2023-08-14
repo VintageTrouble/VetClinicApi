@@ -3,6 +3,7 @@
 using VetClinicApi.Application.Services.AnimalHandling;
 using VetClinicApi.Application.Services.CustomerHandlig;
 using VetClinicApi.Application.Services.ExceptionHandling;
+using VetClinicApi.Application.Services.ProvidedServiceHandling;
 
 namespace VetClinicApi.Application.DependencyInjection;
 
@@ -13,6 +14,7 @@ public static class ApplicationDependencyInjection
         services.AddScoped<IExceptionHandlerService, ExceptionHandlerService>();
         services.AddScoped<ICustomerService, CustomerService>();
         services.AddScoped<IAnimalService, AnimalService>();
+        services.AddScoped<IProvidedServiceService, ProvidedServiceService>();
         return services;
     }
 }

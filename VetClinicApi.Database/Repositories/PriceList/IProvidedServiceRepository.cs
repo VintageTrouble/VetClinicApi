@@ -2,6 +2,6 @@
 
 namespace VetClinicApi.Database.Repositories;
 
-public interface IPriceListRepository : IAbstractRepository<PriceList>
+public interface IProvidedServiceRepository : IAbstractRepository<ProvidedService>
 {
 }
