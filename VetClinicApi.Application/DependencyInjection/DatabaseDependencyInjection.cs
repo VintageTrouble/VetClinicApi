@@ -20,6 +20,7 @@ public static class DatabaseDependencyInjection
         services.AddScoped<IRoomRepository, RoomRepository>();
         services.AddScoped<IVisitRepository, VisitRepository>();
         services.AddScoped<IProvidedServiceRepository, ProvidedServiceRepository>();
+        services.AddScoped<IRoomRepository, RoomRepository>();
 
         return services;
     }
