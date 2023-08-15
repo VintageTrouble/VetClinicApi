@@ -15,7 +15,7 @@ public class CustomerService : ICustomerService
 
     public async Task<Customer> CreateCustomer(Customer? customer)
     {
-        if (customer == null)
+        if (customer is null)
             throw new ArgumentNullException(nameof(customer), "Customer can't be null.");
 
         if (await _repository.GetByPassportNumber(customer.PassportNumber) is not null)
@@ -30,7 +30,7 @@ public class CustomerService : ICustomerService
 
     public async Task<Customer> UpdateCustomer(Customer? customer)
     {
-        if (customer == null)
+        if (customer is null)
             throw new ArgumentNullException(nameof(customer), "Customer can't be null.");
 
         if (await _repository.GetById(customer.Id) is not Customer databaseCustomer)

@@ -19,7 +19,7 @@ public class AnimalService : IAnimalService
 
     public async Task<Animal> CreateAnimal(Animal? animal)
     {
-        if (animal == null)
+        if (animal is null)
             throw new ArgumentNullException(nameof(animal), "Animal can't be null.");
 
         if (await _customerRepository.GetById(animal.CustomerId) is null)
@@ -55,7 +55,7 @@ public class AnimalService : IAnimalService
 
     public async Task<Animal> UpdateAnimal(Animal? animal)
     {
-        if (animal == null)
+        if (animal is null)
             throw new ArgumentNullException(nameof(animal), "Animal can't be null.");
 
         if (await _animalRepository.GetById(animal.Id) is not Animal databaseAnimal)
@@ -81,7 +81,7 @@ public class AnimalService : IAnimalService
     //AnimalTypeMethods
     public async Task<AnimalType> CreateAnimalType(AnimalType? animalType)
     {
-        if (animalType == null)
+        if (animalType is null)
             throw new ArgumentNullException(nameof(animalType), "AnimalType can't be null.");
         return await _animalTypeRepository.Add(animalType);
     }
