@@ -6,7 +6,5 @@ namespace VetClinicApi.Core.Entities
     {
         public int Id { get; set; }
         public RoomType RoomType { get; set; }
-        public bool IsAvailable { get; set; }
-
     }
 }
