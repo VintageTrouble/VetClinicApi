@@ -2,7 +2,7 @@
 
 public static class MigrationVersioning
 {
-    public const long MaxVersion = CreateVisitTable;
+    public const long MaxVersion = UpdateVisitTable;
 
     public const long CreateCustomerTable = 1;
     public const long CreateAnimalTypeTable = 2;
@@ -12,4 +12,5 @@ public static class MigrationVersioning
     public const long CreateProvidedServiceTable = 6;
     public const long CreateVisitStatusTable = 7;
     public const long CreateVisitTable = 8;
+    public const long UpdateVisitTable = 9;
 }

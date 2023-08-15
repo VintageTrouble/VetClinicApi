@@ -3,7 +3,7 @@
 namespace VetClinicApi.Database.Migrations.Migrations;
 
 [Migration(MigrationVersioning.CreateProvidedServiceTable)]
-public class Migration_006_ProvidedServiceListTable : Migration
+public class Migration_006_ProvidedServiceTable : Migration
 {
     public override void Up()
     {
