@@ -15,9 +15,14 @@ public class VisitConfiguration : BaseConfiguration<Visit>
             .HasKey(x => x.Id);
 
         builder
-            .HasOne<Animal>()
+            .HasOne<Customer>()
             .WithMany()
             .HasForeignKey(x => x.CustomerId);
+
+        builder
+            .HasOne(x => x.Room)
+            .WithMany()
+            .HasForeignKey(x => x.RoomId);
 
         base.Configure(builder);
     }
