@@ -4,6 +4,7 @@ using Microsoft.Extensions.DependencyInjection;
 using VetClinicApi.Core.Entities;
 using VetClinicApi.Database;
 using VetClinicApi.Database.Repositories;
+using VetClinicApi.Database.Repositories.Base;
 
 namespace VetClinicApi.Application.DependencyInjection;
 
