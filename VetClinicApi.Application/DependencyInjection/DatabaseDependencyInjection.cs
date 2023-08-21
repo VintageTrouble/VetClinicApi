@@ -15,11 +15,11 @@ public static class DatabaseDependencyInjection
             options.UseNpgsql(connectionString));
 
         services.AddScoped<ICustomerRepository, CustomerRepository>();
-        services.AddScoped<IAnimalRepository, AnimalRepository>();
-        services.AddScoped<IAbstractRepository<AnimalType>, AnimalTypeRepository>();
-        services.AddScoped<IRoomRepository, RoomRepository>();
-        services.AddScoped<IVisitRepository, VisitRepository>();
-        services.AddScoped<IProvidedServiceRepository, ProvidedServiceRepository>();
+        services.AddScoped<IRepository<Animal>, BaseRepository<Animal>>();
+        services.AddScoped<IRepository<AnimalType>, BaseRepository<AnimalType>>();
+        services.AddScoped<IRepository<Room>, BaseRepository<Room>>();
+        services.AddScoped<IRepository<Visit>, BaseRepository<Visit>>();
+        services.AddScoped<IRepository<ProvidedService>, BaseRepository<ProvidedService>>();
 
         return services;
     }

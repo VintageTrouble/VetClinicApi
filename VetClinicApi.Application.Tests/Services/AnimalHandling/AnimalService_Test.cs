@@ -11,8 +11,8 @@ namespace VetClinicApi.Application.Tests.Services.AmimalHandling;
 
 public class AnimalService_Test
 {
-    private readonly Mock<IAnimalRepository> _animalRepository = new();
-    private readonly Mock<IAbstractRepository<AnimalType>> _animalTypeRepository = new();
+    private readonly Mock<IRepository<Animal>> _animalRepository = new();
+    private readonly Mock<IRepository<AnimalType>> _animalTypeRepository = new();
     private readonly Mock<ICustomerRepository> _customerRepository = new();
 
     [Fact]

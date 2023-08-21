@@ -2,9 +2,9 @@
 
 using VetClinicApi.Core.Entities;
 
-namespace VetClinicApi.Database.Repositories;
+namespace VetClinicApi.Database.Repositories.Base;
 
-public interface IAbstractRepository<TEntity> where TEntity : class, IEntity
+public interface IRepository<TEntity> where TEntity : class, IEntity
 {
     Task<TEntity> Add(TEntity entity);
     Task Delete(int id);

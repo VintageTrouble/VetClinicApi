@@ -11,7 +11,7 @@ namespace VetClinicApi.Application.Tests.Services.ProvidedServiceHandling;
 
 public class ProvidedServiceService_Test
 {
-    private readonly Mock<IProvidedServiceRepository> _providedServiceRepository = new();
+    private readonly Mock<IRepository<ProvidedService>> _providedServiceRepository = new();
 
     [Fact]
     public async Task Create_ProvidedServiceIsNull_Test()
