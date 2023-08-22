@@ -1,4 +1,6 @@
-﻿namespace VetClinicApi.Core.Entities;
+﻿using VetClinicApi.Core.Entities.Interfaces;
+
+namespace VetClinicApi.Core.Entities;
 
 public class ProvidedService : IEntity
 {
