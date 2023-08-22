@@ -1,16 +1,17 @@
 ﻿using VetClinicApi.Application.Common.Exceptions;
 using VetClinicApi.Core.Entities;
 using VetClinicApi.Database.Repositories;
+using VetClinicApi.Database.Repositories.Base;
 
 namespace VetClinicApi.Application.Services.AnimalHandling;
 
 public class AnimalService : IAnimalService
 {
-    private readonly IAnimalRepository _animalRepository;
-    private readonly IAbstractRepository<AnimalType> _animalTypeRepository;
+    private readonly IRepository<Animal> _animalRepository;
+    private readonly IRepository<AnimalType> _animalTypeRepository;
     private readonly ICustomerRepository _customerRepository;
 
-    public AnimalService(IAnimalRepository animalRepository, IAbstractRepository<AnimalType> animalTypeRepository, ICustomerRepository customerRepository)
+    public AnimalService(IRepository<Animal> animalRepository, IRepository<AnimalType> animalTypeRepository, ICustomerRepository customerRepository)
     {
         _animalRepository = animalRepository;
         _animalTypeRepository = animalTypeRepository;

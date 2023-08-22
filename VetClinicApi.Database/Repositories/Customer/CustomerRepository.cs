@@ -1,10 +1,11 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
 using VetClinicApi.Core.Entities;
+using VetClinicApi.Database.Repositories.Base;
 
 namespace VetClinicApi.Database.Repositories;
 
-public class CustomerRepository : AbstractRepository<Customer>, ICustomerRepository
+public class CustomerRepository : BaseRepository<Customer>, ICustomerRepository
 {
     public CustomerRepository(IDbContextFactory<VetClinicContext> contextFactory) : base(contextFactory)
     { }
