@@ -1,6 +1,6 @@
 ﻿using VetClinicApi.Core.Entities;
 using VetClinicApi.Database.Repositories;
-
+using VetClinicApi.Database.Tests.Repositories.Abstract;
 using Xunit;
 
 namespace VetClinicApi.Database.Tests.Repositories;

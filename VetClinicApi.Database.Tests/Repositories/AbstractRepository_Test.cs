@@ -1,4 +1,5 @@
-﻿using VetClinicApi.Database.Tests.Repositories.TestData;
+﻿using VetClinicApi.Database.Tests.Repositories.Abstract;
+using VetClinicApi.Database.Tests.Repositories.TestData;
 
 using Xunit;
 
