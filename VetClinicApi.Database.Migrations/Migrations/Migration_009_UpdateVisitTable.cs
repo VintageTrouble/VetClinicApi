@@ -14,7 +14,7 @@ public class Migration_009_UpdateVisitTable : Migration
             .SetExistingRowsTo(0);
 
         Create.ForeignKey("FK_VisitRoom")
-            .FromTable("T_Visit").ForeignColumn("RoomId").ToTable("Room").PrimaryColumn("Id");
+            .FromTable("T_Visit").ForeignColumn("RoomId").ToTable("T_Room").PrimaryColumn("Id");
     }
     public override void Down()
     {
