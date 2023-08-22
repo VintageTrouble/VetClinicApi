@@ -8,7 +8,7 @@ namespace VetClinicApi.Database.Tests.Repositories;
 public class CustomerRepository_Tests : ContextFactoryCreator
 {
     [Fact]
-    public async Task GetByPassportNumber()
+    public async Task GetByPassportNumber_CustomerExists_ReturnnsCustomer()
     {
         using (var context = _dbContextFactory.CreateDbContext())
         {
@@ -33,5 +33,15 @@ public class CustomerRepository_Tests : ContextFactoryCreator
 
         Assert.NotNull(result);
         Assert.Equal(1, result!.Id);
+    }
+
+    [Fact]
+    public async Task GetByPassportNumber_CustomerNotExists_ReturnnsNull()
+    {
+        var repository = new CustomerRepository(_dbContextFactory);
+
+        var result = await repository.GetByPassportNumber("123");
+
+        Assert.Null(result);
     }
 }
