@@ -2,20 +2,20 @@
 using VetClinicApi.Application.Infrastructure.DateTimeProvider;
 using VetClinicApi.Core.Entities;
 using VetClinicApi.Database.Repositories;
+using VetClinicApi.Database.Repositories.Base;
 
 namespace VetClinicApi.Application.Services.AnimalHandling;
 
 public class AnimalService : IAnimalService
 {
     private readonly IDateTimeProvider _dateTimeProvider;
-    private readonly IAnimalRepository _animalRepository;
-    private readonly IAbstractRepository<AnimalType> _animalTypeRepository;
+    private readonly IRepository<Animal> _animalRepository;
+    private readonly IRepository<AnimalType> _animalTypeRepository;
     private readonly ICustomerRepository _customerRepository;
 
-    public AnimalService(
-        IDateTimeProvider dateTimeProvider,
-        IAnimalRepository animalRepository, 
-        IAbstractRepository<AnimalType> animalTypeRepository, 
+    public AnimalService(IDateTimeProvider dateTimeProvider, 
+        IRepository<Animal> animalRepository, 
+        IRepository<AnimalType> animalTypeRepository, 
         ICustomerRepository customerRepository)
     {
         _dateTimeProvider = dateTimeProvider;

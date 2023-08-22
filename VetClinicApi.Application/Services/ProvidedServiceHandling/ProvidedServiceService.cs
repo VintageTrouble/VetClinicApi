@@ -1,14 +1,15 @@
 ﻿using VetClinicApi.Application.Common.Exceptions;
 using VetClinicApi.Core.Entities;
 using VetClinicApi.Database.Repositories;
+using VetClinicApi.Database.Repositories.Base;
 
 namespace VetClinicApi.Application.Services.ProvidedServiceHandling;
 
 public class ProvidedServiceService : IProvidedServiceService
 {
-    private readonly IProvidedServiceRepository _providedServiceRepository;
+    private readonly IRepository<ProvidedService> _providedServiceRepository;
 
-    public ProvidedServiceService(IProvidedServiceRepository providedServiceRepository)
+    public ProvidedServiceService(IRepository<ProvidedService> providedServiceRepository)
     {
         _providedServiceRepository = providedServiceRepository;
     }

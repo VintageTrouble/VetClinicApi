@@ -3,12 +3,12 @@
 using System.Linq.Expressions;
 using VetClinicApi.Core.Entities.Interfaces;
 
-namespace VetClinicApi.Database.Repositories;
+namespace VetClinicApi.Database.Repositories.Base;
 
-public abstract class AbstractRepository<TEntity> : IAbstractRepository<TEntity> where TEntity : class, IEntity
+public class BaseRepository<TEntity> : IRepository<TEntity> where TEntity : class, IEntity
 {
     protected IDbContextFactory<VetClinicContext> _contextFactory;
-    public AbstractRepository(IDbContextFactory<VetClinicContext> contextFactory) => _contextFactory = contextFactory;
+    public BaseRepository(IDbContextFactory<VetClinicContext> contextFactory) => _contextFactory = contextFactory;
 
     public virtual async Task<IEnumerable<TEntity>> GetAll()
     {
@@ -42,7 +42,7 @@ public abstract class AbstractRepository<TEntity> : IAbstractRepository<TEntity>
         using var context = _contextFactory.CreateDbContext();
 
         if (await context.FindAsync<TEntity>(entity.Id) is not TEntity oldEntity)
-            throw new ArgumentOutOfRangeException(nameof(entity.Id));
+            throw new ArgumentOutOfRangeException(nameof(entity), $"Entity with id={entity.Id} not found.");
 
         context.Entry(oldEntity).State = EntityState.Detached;
 

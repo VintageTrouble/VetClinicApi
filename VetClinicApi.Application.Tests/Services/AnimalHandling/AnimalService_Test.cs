@@ -5,6 +5,7 @@ using VetClinicApi.Application.Infrastructure.DateTimeProvider;
 using VetClinicApi.Application.Services.AnimalHandling;
 using VetClinicApi.Core.Entities;
 using VetClinicApi.Database.Repositories;
+using VetClinicApi.Database.Repositories.Base;
 
 using Xunit;
 
@@ -12,9 +13,9 @@ namespace VetClinicApi.Application.Tests.Services.AmimalHandling;
 
 public class AnimalService_Test
 {
+    private readonly Mock<IRepository<Animal>> _animalRepository = new();
+    private readonly Mock<IRepository<AnimalType>> _animalTypeRepository = new();
     private readonly Mock<IDateTimeProvider> _dateTimeProvider = new();
-    private readonly Mock<IAnimalRepository> _animalRepository = new();
-    private readonly Mock<IAbstractRepository<AnimalType>> _animalTypeRepository = new();
     private readonly Mock<ICustomerRepository> _customerRepository = new();
     private readonly DateTime _testDateTime = new(2022, 07, 07);
 

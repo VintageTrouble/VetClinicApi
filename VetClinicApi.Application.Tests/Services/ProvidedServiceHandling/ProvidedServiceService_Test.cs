@@ -4,6 +4,7 @@ using VetClinicApi.Application.Common.Exceptions;
 using VetClinicApi.Application.Services.ProvidedServiceHandling;
 using VetClinicApi.Core.Entities;
 using VetClinicApi.Database.Repositories;
+using VetClinicApi.Database.Repositories.Base;
 
 using Xunit;
 
@@ -11,7 +12,7 @@ namespace VetClinicApi.Application.Tests.Services.ProvidedServiceHandling;
 
 public class ProvidedServiceService_Test
 {
-    private readonly Mock<IProvidedServiceRepository> _providedServiceRepository = new();
+    private readonly Mock<IRepository<ProvidedService>> _providedServiceRepository = new();
 
     [Fact]
     public async Task Create_ProvidedServiceIsNull_Test()
