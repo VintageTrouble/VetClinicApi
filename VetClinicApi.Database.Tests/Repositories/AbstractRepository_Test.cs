@@ -4,7 +4,7 @@ using Xunit;
 
 namespace VetClinicApi.Database.Tests.Repositories;
 
-public class AbstractRepository_Test : BaseRepositoryTest
+public class AbstractRepository_Test : ContextFactoryCreator
 {
     [Fact]
     public async Task Update_EntityNotFound_Throw_ArgumentOutOfRangeException()

@@ -5,7 +5,7 @@ using Xunit;
 
 namespace VetClinicApi.Database.Tests.Repositories;
 
-public class CustomerRepository_Tests : BaseRepositoryTest
+public class CustomerRepository_Tests : ContextFactoryCreator
 {
     [Fact]
     public async Task GetByPassportNumber()
