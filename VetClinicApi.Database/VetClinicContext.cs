@@ -15,7 +15,8 @@ public class VetClinicContext : DbContext
 
     public VetClinicContext(DbContextOptions<VetClinicContext> contextOptions) : base(contextOptions)
     {
-        AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
+        if(Database.IsNpgsql())
+            AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
     }
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
