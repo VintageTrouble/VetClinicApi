@@ -1,4 +1,5 @@
 ﻿using VetClinicApi.Application.Common.Exceptions;
+using VetClinicApi.Application.Infrastructure.DateTimeProvider;
 using VetClinicApi.Core.Entities;
 using VetClinicApi.Database.Repositories;
 
@@ -6,10 +7,12 @@ namespace VetClinicApi.Application.Services.CustomerHandlig;
 
 public class CustomerService : ICustomerService
 {
+    private readonly IDateTimeProvider _dateTimeProvider;
     private readonly ICustomerRepository _repository;
 
-    public CustomerService (ICustomerRepository repository)
+    public CustomerService (IDateTimeProvider dateTimeProvider, ICustomerRepository repository)
     {
+        _dateTimeProvider = dateTimeProvider;
         _repository = repository;
     }
 
@@ -21,8 +24,8 @@ public class CustomerService : ICustomerService
         if (await _repository.GetByPassportNumber(customer.PassportNumber) is not null)
             throw new PassportNumberConflictExceprion("PassportNumber are already in use.");
 
-        customer.RegistrationDate = DateTime.Today;
-        customer.LastEditDate = DateTime.Today;
+        customer.CreationDate = _dateTimeProvider.UtcNow;
+        customer.LastEditDate = _dateTimeProvider.UtcNow;
         customer.LastVisitDate = null;
 
         return await _repository.Add(customer);
@@ -39,8 +42,8 @@ public class CustomerService : ICustomerService
         if (databaseCustomer.LastVisitDate is not null && customer.LastVisitDate is null)
             throw new ValueTurnsToNullException(nameof(customer.LastVisitDate));
 
-        customer.LastEditDate = DateTime.Today;
-        customer.RegistrationDate = databaseCustomer.RegistrationDate;
+        customer.LastEditDate = _dateTimeProvider.UtcNow;
+        customer.CreationDate = databaseCustomer.CreationDate;
         try
         {
             return await _repository.Update(customer);
