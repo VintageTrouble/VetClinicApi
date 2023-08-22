@@ -67,7 +67,7 @@ public class CustomerMappingConfig_Test
     }
 
     [Fact]
-    public void Map_UpdateCustomerRequestRequestToCustomer_Test()
+    public void Map_UpdateCustomerRequestToCustomer_Test()
     {
         var customer = new UpdateCustomerRequest(
             1,
