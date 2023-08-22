@@ -20,7 +20,7 @@ public class CustomerRepository_Tests : ContextFactoryCreator
                 BirthDate = DateTime.MaxValue,
                 PassportNumber = "123",
                 PhoneNumber = "321",
-                RegistrationDate = DateTime.MaxValue,
+                CreationDate = DateTime.MaxValue,
                 LastEditDate = DateTime.MaxValue
             });
 

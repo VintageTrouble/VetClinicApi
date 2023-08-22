@@ -1,6 +1,5 @@
 ﻿using System.Linq.Expressions;
-
-using VetClinicApi.Core.Entities;
+using VetClinicApi.Core.Entities.Interfaces;
 
 namespace VetClinicApi.Database.Repositories.Base;
 

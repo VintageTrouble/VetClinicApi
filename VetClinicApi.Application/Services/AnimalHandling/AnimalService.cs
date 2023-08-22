@@ -1,4 +1,5 @@
 ﻿using VetClinicApi.Application.Common.Exceptions;
+using VetClinicApi.Application.Infrastructure.DateTimeProvider;
 using VetClinicApi.Core.Entities;
 using VetClinicApi.Database.Repositories;
 using VetClinicApi.Database.Repositories.Base;
@@ -7,12 +8,17 @@ namespace VetClinicApi.Application.Services.AnimalHandling;
 
 public class AnimalService : IAnimalService
 {
+    private readonly IDateTimeProvider _dateTimeProvider;
     private readonly IRepository<Animal> _animalRepository;
     private readonly IRepository<AnimalType> _animalTypeRepository;
     private readonly ICustomerRepository _customerRepository;
 
-    public AnimalService(IRepository<Animal> animalRepository, IRepository<AnimalType> animalTypeRepository, ICustomerRepository customerRepository)
+    public AnimalService(IDateTimeProvider dateTimeProvider, 
+        IRepository<Animal> animalRepository, 
+        IRepository<AnimalType> animalTypeRepository, 
+        ICustomerRepository customerRepository)
     {
+        _dateTimeProvider = dateTimeProvider;
         _animalRepository = animalRepository;
         _animalTypeRepository = animalTypeRepository;
         _customerRepository = customerRepository;
@@ -29,8 +35,8 @@ public class AnimalService : IAnimalService
         if (await _animalTypeRepository.GetById(animal.AnimalTypeId) is null)
             throw new EntityNotFoundException(animal.AnimalTypeId, nameof(AnimalType));
 
-        animal.RegistrationDate = DateTime.Today;
-        animal.LastEditDate = DateTime.Today;
+        animal.CreationDate = _dateTimeProvider.UtcNow;
+        animal.LastEditDate = _dateTimeProvider.UtcNow;
 
         return await _animalRepository.Add(animal);
     }
@@ -63,8 +69,8 @@ public class AnimalService : IAnimalService
             throw new AnimalNotFoundException(animal.Id);
 
 
-        animal.LastEditDate = DateTime.Today;
-        animal.RegistrationDate = databaseAnimal.RegistrationDate;
+        animal.LastEditDate = _dateTimeProvider.UtcNow;
+        animal.CreationDate = databaseAnimal.CreationDate;
         try
         {
             return await _animalRepository.Update(animal);

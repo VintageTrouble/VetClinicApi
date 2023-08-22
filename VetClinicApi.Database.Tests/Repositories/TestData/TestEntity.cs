@@ -1,4 +1,5 @@
 ﻿using VetClinicApi.Core.Entities;
+using VetClinicApi.Core.Entities.Interfaces;
 
 namespace VetClinicApi.Database.Tests.Repositories.TestData;
 

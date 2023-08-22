@@ -1,4 +1,5 @@
-﻿using VetClinicApi.Core.Enums;
+﻿using VetClinicApi.Core.Entities.Interfaces;
+using VetClinicApi.Core.Enums;
 
 namespace VetClinicApi.Core.Entities
 {

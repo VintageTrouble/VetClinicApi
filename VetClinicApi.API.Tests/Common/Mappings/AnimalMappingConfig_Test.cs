@@ -29,7 +29,7 @@ public class AnimalMappingConfig_Test
             Breed = "American Curl",
             BirthDate = new DateTime(2020, 01, 01),
             IsVaccinated = true,
-            RegistrationDate = new DateTime(2021, 04, 03),
+            CreationDate = new DateTime(2021, 04, 03),
             LastEditDate = new DateTime(2021, 04, 03)
         };
 
@@ -63,7 +63,7 @@ public class AnimalMappingConfig_Test
         Assert.Equal(animal.Breed, result.Breed);
         Assert.Equal(animal.IsVaccinated, result.IsVaccinated);
         Assert.Equal(default, result.LastEditDate);
-        Assert.Equal(default, result.RegistrationDate);
+        Assert.Equal(default, result.CreationDate);
     }
 
     [Fact]

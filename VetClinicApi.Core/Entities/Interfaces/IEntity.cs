@@ -1,4 +1,4 @@
-﻿namespace VetClinicApi.Core.Entities;
+﻿namespace VetClinicApi.Core.Entities.Interfaces;
 
 public interface IEntity
 {

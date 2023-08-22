@@ -1,8 +1,7 @@
 ﻿using FluentMigrator;
 
 using System.Reflection;
-
-using VetClinicApi.Core.Entities;
+using VetClinicApi.Core.Entities.Interfaces;
 
 namespace VetClinicApi.Database.Migrations.Migrations;
 

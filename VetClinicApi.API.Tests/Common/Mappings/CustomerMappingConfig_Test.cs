@@ -29,7 +29,7 @@ public class CustomerMappingConfig_Test
             PhoneNumber = "0 (000) 000-00-00",
             LastEditDate = DateTime.Today,
             LastVisitDate = DateTime.Today,
-            RegistrationDate = DateTime.Today
+            CreationDate = DateTime.Today
         };
 
         var result = _mapper.Map<CustomerResponse>(customer);
@@ -61,7 +61,7 @@ public class CustomerMappingConfig_Test
         Assert.Equal(customer.BirthDate, result.BirthDate);
         Assert.Equal(customer.PassportNumber, result.PassportNumber);
         Assert.Equal(customer.PhoneNumber, result.PhoneNumber);
-        Assert.Equal(default, result.RegistrationDate);
+        Assert.Equal(default, result.CreationDate);
         Assert.Equal(default, result.LastEditDate);
         Assert.Null(result.LastVisitDate);
     }
