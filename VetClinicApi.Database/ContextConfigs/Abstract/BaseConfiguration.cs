@@ -1,7 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-
-using VetClinicApi.Core.Entities;
+using VetClinicApi.Core.Entities.Interfaces;
 using VetClinicApi.Core.Extensions;
 
 namespace VetClinicApi.Database.ContextConfigs.Abstract;
