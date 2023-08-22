@@ -1,6 +1,7 @@
 ﻿using Moq;
 
 using VetClinicApi.Application.Common.Exceptions;
+using VetClinicApi.Application.Infrastructure.DateTimeProvider;
 using VetClinicApi.Application.Services.AnimalHandling;
 using VetClinicApi.Core.Entities;
 using VetClinicApi.Database.Repositories;
@@ -11,9 +12,16 @@ namespace VetClinicApi.Application.Tests.Services.AmimalHandling;
 
 public class AnimalService_Test
 {
+    private readonly Mock<IDateTimeProvider> _dateTimeProvider = new();
     private readonly Mock<IAnimalRepository> _animalRepository = new();
     private readonly Mock<IAbstractRepository<AnimalType>> _animalTypeRepository = new();
     private readonly Mock<ICustomerRepository> _customerRepository = new();
+    private readonly DateTime _testDateTime = new(2022, 07, 07);
+
+    public AnimalService_Test()
+    {
+        _dateTimeProvider.Setup(x => x.UtcNow).Returns(_testDateTime);
+    }
 
     [Fact]
     public async Task Create_ValidAnimal_Test()
@@ -47,17 +55,17 @@ public class AnimalService_Test
         _customerRepository.Setup(x => x.GetById(It.IsAny<int>())).ReturnsAsync(customer);
         _animalRepository.Setup(x => x.Add(It.IsAny<Animal>())).ReturnsAsync(animal);
 
-        var animalService = new AnimalService(_animalRepository.Object, _animalTypeRepository.Object, _customerRepository.Object);
+        var animalService = new AnimalService(_dateTimeProvider.Object, _animalRepository.Object, _animalTypeRepository.Object, _customerRepository.Object);
         var result = await animalService.CreateAnimal(animal);
 
-        Assert.Equal(DateTime.Today, result.RegistrationDate);
-        Assert.Equal(DateTime.Today, result.LastEditDate);
+        Assert.Equal(_testDateTime, result.CreationDate);
+        Assert.Equal(_testDateTime, result.LastEditDate);
     }
 
     [Fact]
     public async Task Create_AnimalIsNull_Test()
     {
-        var animalService = new AnimalService(_animalRepository.Object, _animalTypeRepository.Object, _customerRepository.Object);
+        var animalService = new AnimalService(_dateTimeProvider.Object, _animalRepository.Object, _animalTypeRepository.Object, _customerRepository.Object);
 
         await Assert.ThrowsAsync<ArgumentNullException>(async() => await animalService.CreateAnimal(null));
     }
@@ -77,7 +85,8 @@ public class AnimalService_Test
         };
 
         _animalTypeRepository.Setup(x => x.GetById(It.IsAny<int>())).ReturnsAsync(() => null);
-        var animalService = new AnimalService(_animalRepository.Object, _animalTypeRepository.Object, _customerRepository.Object);
+
+        var animalService = new AnimalService(_dateTimeProvider.Object, _animalRepository.Object, _animalTypeRepository.Object, _customerRepository.Object);
 
         await Assert.ThrowsAsync<EntityNotFoundException>(async () => await animalService.CreateAnimal(animal));
     }
@@ -103,7 +112,7 @@ public class AnimalService_Test
 
         _animalTypeRepository.Setup(x => x.GetById(It.IsAny<int>())).ReturnsAsync(animalType);
         _customerRepository.Setup(x => x.GetById(It.IsAny<int>())).ReturnsAsync(() => null);
-        var animalService = new AnimalService(_animalRepository.Object, _animalTypeRepository.Object, _customerRepository.Object);
+        var animalService = new AnimalService(_dateTimeProvider.Object, _animalRepository.Object, _animalTypeRepository.Object, _customerRepository.Object);
 
         await Assert.ThrowsAsync<EntityNotFoundException>(async () => await animalService.CreateAnimal(animal));
     }
@@ -121,7 +130,7 @@ public class AnimalService_Test
             Breed = "Test2",
             IsVaccinated = true,
             LastEditDate = new DateTime(2015, 02, 12),
-            RegistrationDate = new DateTime(1000, 01, 01),
+            CreationDate = new DateTime(1000, 01, 01),
         };
         var databaseAnimal = new Animal()
         {
@@ -133,23 +142,23 @@ public class AnimalService_Test
             Breed = "Test2",
             IsVaccinated = true,
             LastEditDate = new DateTime(2015, 02, 12),
-            RegistrationDate = new DateTime(1000, 01, 01),
+            CreationDate = new DateTime(1000, 01, 01),
         };
 
         _animalRepository.Setup(x => x.Update(It.IsAny<Animal>())).ReturnsAsync(animal);
         _animalRepository.Setup(x => x.GetById(It.IsAny<int>())).ReturnsAsync(databaseAnimal);
-        var animalService = new AnimalService(_animalRepository.Object, _animalTypeRepository.Object, _customerRepository.Object);
+        var animalService = new AnimalService(_dateTimeProvider.Object, _animalRepository.Object, _animalTypeRepository.Object, _customerRepository.Object);
 
         var result = await animalService.UpdateAnimal(animal);
 
-        Assert.Equal(DateTime.Today, result.LastEditDate);
-        Assert.Equal(databaseAnimal.RegistrationDate, result.RegistrationDate);
+        Assert.Equal(_testDateTime, result.LastEditDate);
+        Assert.Equal(databaseAnimal.CreationDate, result.CreationDate);
     }
 
     [Fact]
     public async Task Update_AnimalIsNull_Test()
     {
-        var animalService = new AnimalService(_animalRepository.Object, _animalTypeRepository.Object, _customerRepository.Object);
+        var animalService = new AnimalService(_dateTimeProvider.Object, _animalRepository.Object, _animalTypeRepository.Object, _customerRepository.Object);
 
         await Assert.ThrowsAsync<ArgumentNullException>(async () => await animalService.UpdateAnimal(null));
     }
@@ -167,10 +176,10 @@ public class AnimalService_Test
             Breed = "Test2",
             IsVaccinated = true,
             LastEditDate = new DateTime(2015, 02, 12),
-            RegistrationDate = new DateTime(1000, 01, 01),
+            CreationDate = new DateTime(1000, 01, 01),
         };
         _animalRepository.Setup(x => x.GetById(It.IsAny<int>())).ReturnsAsync(() => null);
-        var animalService = new AnimalService(_animalRepository.Object, _animalTypeRepository.Object, _customerRepository.Object);
+        var animalService = new AnimalService(_dateTimeProvider.Object, _animalRepository.Object, _animalTypeRepository.Object, _customerRepository.Object);
 
         await Assert.ThrowsAsync<AnimalNotFoundException>(async () => await animalService.UpdateAnimal(animal));
     }
@@ -181,7 +190,7 @@ public class AnimalService_Test
         var animal = new Animal() { Id = 1 };
 
         _animalRepository.Setup(x => x.Update(It.IsAny<Animal>())).ThrowsAsync(new ArgumentOutOfRangeException());
-        var animalService = new AnimalService(_animalRepository.Object, _animalTypeRepository.Object, _customerRepository.Object);
+        var animalService = new AnimalService(_dateTimeProvider.Object, _animalRepository.Object, _animalTypeRepository.Object, _customerRepository.Object);
 
         var exception = await Assert.ThrowsAsync<AnimalNotFoundException>(async () => await animalService.UpdateAnimal(animal));
 
@@ -192,7 +201,7 @@ public class AnimalService_Test
     public async Task Get_IdIsNotExist_Test()
     {
         _animalRepository.Setup(x => x.GetById(It.IsAny<int>())).ReturnsAsync(() => null);
-        var animalService = new AnimalService(_animalRepository.Object, _animalTypeRepository.Object, _customerRepository.Object);
+        var animalService = new AnimalService(_dateTimeProvider.Object, _animalRepository.Object, _animalTypeRepository.Object, _customerRepository.Object);
 
         await Assert.ThrowsAsync<AnimalNotFoundException>(async () => await animalService.GetAnimal(1));
     }
@@ -201,7 +210,7 @@ public class AnimalService_Test
     public async Task Delete_AnimalNotFound_Test()
     {
         _animalRepository.Setup(x => x.Delete(It.IsAny<int>())).ThrowsAsync(new ArgumentOutOfRangeException());
-        var animalService = new AnimalService(_animalRepository.Object, _animalTypeRepository.Object, _customerRepository.Object);
+        var animalService = new AnimalService(_dateTimeProvider.Object, _animalRepository.Object, _animalTypeRepository.Object, _customerRepository.Object);
 
         await Assert.ThrowsAsync<AnimalNotFoundException>(async () => await animalService.DeleteAnimal(1));
     }
@@ -210,7 +219,7 @@ public class AnimalService_Test
     [Fact]
     public async Task Create_AnimaTypelIsNull_Test()
     {
-        var animalTypeService = new AnimalService(_animalRepository.Object, _animalTypeRepository.Object, _customerRepository.Object);
+        var animalTypeService = new AnimalService( _dateTimeProvider.Object, _animalRepository.Object, _animalTypeRepository.Object, _customerRepository.Object);
 
         await Assert.ThrowsAsync<ArgumentNullException>(async () => await animalTypeService.CreateAnimalType(null));
     }
@@ -219,7 +228,7 @@ public class AnimalService_Test
     public async Task Delete_AnimalTypeNotFound_Test()
     {
         _animalTypeRepository.Setup(x => x.Delete(It.IsAny<int>())).ThrowsAsync(new ArgumentOutOfRangeException());
-        var animalTypeService = new AnimalService(_animalRepository.Object, _animalTypeRepository.Object, _customerRepository.Object);
+        var animalTypeService = new AnimalService(_dateTimeProvider.Object, _animalRepository.Object, _animalTypeRepository.Object, _customerRepository.Object);
 
         await Assert.ThrowsAsync<AnimalTypeNotFoundException>(async () => await animalTypeService.DeleteAnimalType(1));
     }
